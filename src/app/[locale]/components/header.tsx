@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Icon } from "@iconify/react";
 import LocaleSwitcherSelect from "./LocaleSwitcherSelect";
 import Image from "next/image";
-import { useAppKit, useAppKitAccount, useDisconnect } from "@reown/appkit/react"; // Reown hooks
+import {  useAppKitAccount, useDisconnect } from "@reown/appkit/react"; // Reown hooks
 import { motion } from "framer-motion";
 
 // Animation variants (unchanged)
