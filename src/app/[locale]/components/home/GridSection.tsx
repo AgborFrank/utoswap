@@ -79,8 +79,8 @@ export default function Introduction() {
       animate={isInView ? "visible" : "hidden"}
     >
       <div className="w-full">
-        <h2 className="lg:text-6xl text-3xl text-white">{t("title")}</h2>
-        <h3 className="lg:text-3xl text-xl text-gray-400">{t("subtitle")}</h3>
+        <h2 className="lg:text-6xl text-3xl text-text">{t("title")}</h2>
+        <h3 className="lg:text-3xl text-xl text-text opacity-70">{t("subtitle")}</h3>
       </div>
       <div className="grid md:grid-cols-2 grid-cols-1 pt-20 gap-6 xl:gap-20">
         {gridItems.map((item, index) => (
@@ -98,23 +98,23 @@ export default function Introduction() {
               {item.label}
             </div>
             <h3 className={`${item.titleColor} text-4xl pt-4`}>{item.title}</h3>
-            {item.desc && <p className="text-gray-300 mt-4">{item.desc}</p>}
+            {item.desc && <p className="text-text opacity-70 mt-4">{item.desc}</p>}
 
             {/* Sub-items for the first grid item */}
             {item.subItems && (
               <div className="grid grid-cols-2 gap-4 pt-8">
                 {item.subItems.map((sub, idx) => (
-                  <div key={idx} className="rounded-2xl bg-[#313131a0] p-4">
-                    <h1 className="text-white mb-3 text-2xl">{sub.title}</h1>
-                    <p className="text-sm text-white opacity-70">{sub.desc}</p>
+                  <div key={idx} className="rounded-2xl bg-grade p-4">
+                    <h1 className="text-text mb-3 text-2xl">{sub.title}</h1>
+                    <p className="text-sm text-text opacity-70">{sub.desc}</p>
                   </div>
                 ))}
               </div>
             )}
             {item.extraItem && (
-              <div className="rounded-2xl bg-[#313131a0] p-4 mt-4">
-                <h1 className="text-white mb-3 text-2xl">{item.extraItem.title}</h1>
-                <p className="text-sm text-white opacity-70">{item.extraItem.desc}</p>
+              <div className="rounded-2xl bg-grade p-4 mt-4">
+                <h1 className="text-text mb-3 text-2xl">{item.extraItem.title}</h1>
+                <p className="text-sm text-text opacity-70">{item.extraItem.desc}</p>
               </div>
             )}
 

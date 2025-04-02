@@ -12,7 +12,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
     <Header />
     <Template>
-    <main className=" items-center justify-center bg-[#131313]">
+    <main className=" items-center justify-center bg-background">
       <TokenInteraction />
       <Introduction />
       <TokenStats />

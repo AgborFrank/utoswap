@@ -2,8 +2,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "daisyui";
 
 :root {
+  --background: #ffffff;
+  --text: #000000;
+  --cta: #e8c56b;
   --font-dm-sans: 'DM Sans', sans-serif;
   --font-ruda: 'Ruda', sans-serif;
   --white: #ffffff;
@@ -21,13 +25,20 @@
     --go: #3837e4;
 }
 .ant-input::placeholder {
-  color: white !important;
+  color: rgb(67, 67, 67) !important;
+}
+appkit-connect-button button .wui-text, wui-connect-button {
+  color: 'black' !important
+
+}
+.wui-flex {
+  background: #ffffff82 !important;
 }
 .ant-input, .ant-btn-color-default {
   color: #ffc757 !important;
 }
 footer .lang button, header .lang button {
-  background-color: #000!important;
+  background-color: var(--background) !important;
   border-width: 1.5px;
   border-color: #8a8989;
   border-radius: 10px;
@@ -78,7 +89,7 @@ footer ul li {
   padding-bottom: 140px;
 }
 footer p {
-  color: #B3BFCF !important;
+
   font-weight: normal;
 }
 input, select{
@@ -96,6 +107,62 @@ h1,h2,h3,h4,h5 {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+[data-theme="light"] {
+  --background: #ffffff;
+  --text: #000000;
+  --cta: #e8c56b;
+  --grade: #fbf8f0;
+  --wallet: #ffffff;
+}
+
+[data-theme="dark"] {
+  --background: #000000;
+  --text: #ffffff;
+  --cta: #e8c56b;
+  --grade: #161103;
+  --wallet: #25252584;
+}
+
+/* Apply theme variables */
+body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+/* Update Header-specific styles */
+header {
+  background-color: var(--background);
+}
+
+/* Ensure text and backgrounds adapt */
+.text-text {
+  color: var(--text);
+}
+
+.bg-background {
+  background-color: var(--background);
+}
+
+.text-cta {
+  color: var(--cta);
+}
+
+.bg-cta {
+  background-color: var(--cta);
+}
+
+.bg-cta\/10 {
+  background-color: rgba(var(--cta-rgb, 232, 197, 107), 0.1);
+}
+
+.bg-cta\/20 {
+  background-color: rgba(var(--cta-rgb, 232, 197, 107), 0.2);
+}
+
+.bg-cta\/50 {
+  background-color: rgba(var(--cta-rgb, 232, 197, 107), 0.5);
 }
 
 .ruda {

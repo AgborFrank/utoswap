@@ -42,14 +42,14 @@ export default function LocaleSwitcherSelect({
         isPending && "transition-opacity opacity-30"
       )}
     >
-      <Icon icon="meteor-icons:globe" width={24} height={24} className="text-white mr-4" />
+      <Icon icon="meteor-icons:globe" width={24} height={24} className="lang-icon text-text mr-4" />
       <p className="sr-only">{t(`language.${defaultValue}`)}</p>
       <Select
         placeholder={label}
         defaultSelectedKeys={[defaultValue]}
         disabled={isPending}
         onChange={onSelectChange}
-        className={clsx("max-w-[100px] bg-black min-w-[100px] lang")}
+        className={clsx("max-w-[100px]  min-w-[100px] lang")}
       >
         <SelectItem key="en" >
           <div className="flex items-center gap-2">

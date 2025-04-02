@@ -55,7 +55,11 @@ const config: Config = {
   				DEFAULT: '#FFFFFFFF',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
-  			cta: '#e8c56b',
+  			background: "var(--background)",
+			text: "var(--text)",
+			cta: "var(--cta)",
+			grade: "var(--grade)",
+			wallet: "var(--wallet)",
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
@@ -86,7 +90,7 @@ const config: Config = {
   				light: '#ECF0F1',
   				dark: '#34495E'
   			},
-  			background: 'hsl(var(--background))',
+  			
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',

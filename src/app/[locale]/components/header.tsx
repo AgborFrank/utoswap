@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Link } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { Icon } from "@iconify/react";
@@ -41,9 +41,28 @@ const menuItemVariants = {
 export default function Header() {
   const t = useTranslations("common.Navigation");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light"); // Default to light
   const locale = useLocale();
-  const { address, isConnected } = useAppKitAccount(); // Reown hook for account info
-  const { disconnect } = useDisconnect(); // Reown hook for disconnecting
+  const { address, isConnected } = useAppKitAccount();
+  
+  const {disconnect} = useDisconnect();
+
+  // Load theme from localStorage on mount and apply it
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+    setTheme(initialTheme);
+    document.documentElement.setAttribute("data-theme", initialTheme);
+  }, []);
+
+  // Toggle theme and save to localStorage
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
@@ -52,6 +71,7 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
+  
   const menus = [
     { title: t("bridge"), href: `/${locale}/bridge`, icon: "mdi:bridge" },
     { title: t("swap"), href: `/${locale}/swap`, icon: "mdi:bridge" },
@@ -62,7 +82,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className="flex z-100 w-full items-center sticky top-0 bg-black shadow-sm"
+      className="flex z-100 w-full items-center shadow-md sticky top-0"
       style={{ zIndex: 1000 }}
       variants={headerVariants}
       initial="hidden"
@@ -71,7 +91,11 @@ export default function Header() {
       <div className="flex w-full px-6 items-center justify-between md:max-w-screen-xl mx-auto py-4">
         <div className="flex items-center">
           <Link href="/" className="text-xl font-bold flex items-center gap-2">
+          {theme === "light" ? 
             <Image src="/assets/img/logo.png" alt="Utoswap" width={150} height={60} />
+            : 
+            <Image src="/assets/img/logo.png" alt="Utoswap" width={150} height={60} />
+            }
           </Link>
         </div>
         <nav className="hidden md:flex space-x-8 items-center">
@@ -79,17 +103,28 @@ export default function Header() {
             <Link
               key={menu.title}
               href={menu.href}
-              className="font-normal text-white flex items-center gap-2 hover:text-cta transition-colors"
+              className="font-normal text-text flex items-center gap-2 hover:text-cta transition-colors"
             >
               {menu.title}
             </Link>
           ))}
         </nav>
         <div className="hidden md:flex items-center space-x-4">
+          <Button
+            onPress={toggleTheme}
+            className="p-2 bg-background text-text rounded-full hover:bg-cta/10 transition-colors"
+            aria-label="Toggle theme"
+          >
+            <Icon
+              icon={theme === "light" ? "mdi:weather-sunny" : "mdi:weather-night"}
+              className="text-xl"
+            />
+            <p>{theme === "light" ? "Light" : "Dark"}</p>
+          </Button>
           <LocaleSwitcherSelect defaultValue={locale} label={t("label")} />
           {isConnected ? (
             <div className="flex items-center gap-2">
-              <span className="text-white font-medium">
+              <span className="text-text font-medium">
                 {address?.slice(0, 6)}...{address?.slice(-4)}
               </span>
               <Button
@@ -101,11 +136,13 @@ export default function Header() {
               </Button>
             </div>
           ) : (
-            <appkit-button />
+           
+             <appkit-button  />
           )}
+         
         </div>
         <Button
-          className="md:hidden p-2 text-white rounded-lg bg-cta/10 hover:opacity-80 focus:outline-none"
+          className="md:hidden p-2 text-text rounded-lg bg-cta/10 hover:opacity-80 focus:outline-none"
           onPress={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -115,7 +152,7 @@ export default function Header() {
       </div>
       {isMenuOpen && (
         <motion.div
-          className="md:hidden bg-black shadow-lg absolute top-full inset-x-0"
+          className="md:hidden shadow-lg absolute top-full inset-x-0"
           style={{ zIndex: 2000 }}
           variants={mobileMenuVariants}
           initial="hidden"
@@ -133,28 +170,39 @@ export default function Header() {
               >
                 <Link
                   href={menu.href}
-                  className="text-gray-100 flex items-center gap-2 hover:text-cta transition-colors"
+                  className="text-text flex items-center gap-2 hover:text-cta transition-colors"
                 >
                   {menu.title}
                 </Link>
               </motion.div>
             ))}
             <div className="border-t border-gray-200 pt-4">
+              <Button
+                onPress={toggleTheme}
+                className="p-2 bg-background text-text rounded-full hover:bg-cta/10 transition-colors w-full flex justify-center"
+                aria-label="Toggle theme"
+              >
+                <Icon
+                  icon={theme === "light" ? "mdi:weather-sunny" : "mdi:weather-night"}
+                  className="text-xl"
+                />
+              </Button>
               {isConnected ? (
                 <div className="flex flex-col gap-2">
-                  <span className="text-gray-800 font-medium">
+                  <span className="text-text font-medium">
                     {address?.slice(0, 6)}...{address?.slice(-4)}
                   </span>
                   <Button
                     onPress={handleDisconnect}
-                    className="bg-cta text-black px-4 py-2 rounded-2xl hover:bg-cta"
+                    className="bg-cta text-background px-4 py-2 rounded-2xl hover:bg-cta"
                   >
                     Disconnect
                   </Button>
                 </div>
               ) : (
-                <appkit-button /> 
+                <appkit-button  />
               )}
+              
               <div className="mt-4">
                 <LocaleSwitcherSelect defaultValue={locale} label={t("label")} />
               </div>

@@ -60,20 +60,20 @@ export default function MigrationReasons() {
   return (
     <motion.section
       ref={ref}
-      className="py-28 bg-gradient-to-b from-[#131313] to-[#000000] md:px-0 px-6"
+      className="py-28 bg-gradient-to-b from-background to-grade md:px-0 px-6"
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
     >
       <div className="max-w-screen-xl mx-auto">
-        <h2 className="text-4xl text-white font-bold text-center my-12">
+        <h2 className="text-4xl text-black font-bold text-center my-12">
           {t("migration_reasons_title")}
         </h2>
         <div className="grid md:grid-cols-4 grid-cols-2 gap-8">
           {migrationReasons.map((reason, index) => (
             <motion.div
               key={index}
-              className="p-6 bg-[#29251c91] rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="p-6 bg-white/20 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
               variants={gridItemVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
@@ -85,10 +85,10 @@ export default function MigrationReasons() {
                 height={40}
                 className="text-cta mb-6"
               />
-              <h3 className="text-lg text-white font-semibold mb-4">
+              <h3 className="text-lg text-text font-semibold mb-4">
                 {t(`${reason.key}.title`)}
               </h3>
-              <p className="text-gray-300 text-sm">
+              <p className="text-text opacity-70 text-sm">
                 {t(`${reason.key}.description`)}
               </p>
             </motion.div>

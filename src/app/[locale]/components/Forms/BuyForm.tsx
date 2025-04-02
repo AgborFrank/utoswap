@@ -7,6 +7,9 @@ import Image from "next/image";
 import Web3 from "web3";
 import Link from "next/link";
 import UTOPV3SaleABI from "../../../../../lib/UTOPV3SaleABI.json";
+import { useTranslations } from "next-intl";
+import { useChainId, useSwitchChain, useWriteContract, useWalletClient } from "wagmi";
+import { useAppKitAccount } from "@reown/appkit/react";
 
 const { Title, Text } = Typography;
 
@@ -48,6 +51,7 @@ const paymentTokens = [
 const UTOPV3_TOKEN = { symbol: "UTOP", name: "Utopos V3", address: UTOPV3_ADDRESS, decimals: 18 };
 
 export default function BuyForm() {
+  const t = useTranslations("common.home.swap"); 
   const [paymentToken, setPaymentToken] = useState(paymentTokens[0]); // Default to USDT
   const [toToken] = useState(UTOPV3_TOKEN);
   const [amount, setAmount] = useState("");
@@ -55,98 +59,37 @@ export default function BuyForm() {
   const [utopAmount, setUtopAmount] = useState<string>("0");
   const [modalVisible, setModalVisible] = useState(false);
   const [web3, setWeb3] = useState<Web3 | null>(null);
-  const [account, setAccount] = useState<string | null>(null);
   const [isApproved, setIsApproved] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const connectWallet = async () => {
-    if (window.ethereum) {
-      const web3Instance = new Web3(window.ethereum);
-      setWeb3(web3Instance);
-      try {
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        const accounts = await web3Instance.eth.getAccounts();
-        setAccount(accounts[0]);
-        const chainId = Number(await web3Instance.eth.getChainId());
-        if (chainId !== 137) {
-          message.error("Please switch to Polygon Mainnet");
-          return;
-        }
-      } catch (error) {
-        message.error(`Error: ${(error as Error).message}`);
-      }
-    } else {
-      message.error("Please install MetaMask");
-    }
-  };
+  // Reown AppKit hook for account info
+  const { address, isConnected } = useAppKitAccount();
 
-  const handleApprove = async () => {
-    if (!web3 || !account || !amount) {
-      message.error("Connect wallet and enter an amount");
-      return;
-    }
-    if (paymentToken.address === "0x0") {
-      setIsApproved(true); // POL doesn't need approval
-      return;
-    }
-    setLoading(true);
-    const tokenContract = new web3.eth.Contract(ERC20_ABI, paymentToken.address);
-    const weiAmount = web3.utils.toWei(amount, paymentToken.decimals === 6 ? "mwei" : "ether");
+  // Wagmi hooks
+  const chainId = useChainId();
+  const { switchChain } = useSwitchChain();
+  const { writeContractAsync } = useWriteContract();
+  const { data: walletClient } = useWalletClient();
 
-    try {
-      const balance = await tokenContract.methods.balanceOf(account).call() as string; // Type assertion to string
-      if (BigInt(balance) < BigInt(weiAmount)) {
-        message.error("Insufficient balance");
-        setLoading(false);
-        return;
-      }
-      await tokenContract.methods.approve(SALE_CONTRACT_ADDRESS, weiAmount).send({ from: account });
-      setIsApproved(true);
-      message.success("Approved! Now click Buy");
-    } catch (error) {
-      message.error(`Error: ${(error as Error).message}`);
-    }
-    setLoading(false);
-  };
-
-  const handleBuy = async () => {
-    if (!web3 || !account || !amount) return;
-    setLoading(true);
-    const saleContract = new web3.eth.Contract(UTOPV3SaleABI, SALE_CONTRACT_ADDRESS);
-    const weiAmount = web3.utils.toWei(amount, paymentToken.decimals === 6 ? "mwei" : "ether");
-
-    try {
-      if (paymentToken.address === "0x0") {
-        await saleContract.methods.buyWithPOL().send({ from: account, value: weiAmount });
-      } else if (paymentToken.symbol === "USDT") {
-        await saleContract.methods.buyWithUSDT(weiAmount).send({ from: account });
-      } else if (paymentToken.symbol === "BNB") {
-        await saleContract.methods.buyWithBNB(weiAmount).send({ from: account });
-      }
-      message.success(`Successfully purchased ${utopAmount} UTOPV3!`);
-      setAmount("");
-      setIsApproved(false);
-    } catch (error) {
-      message.error(`Error: ${(error as Error).message}`);
-    }
-    setLoading(false);
-  };
-
-  const handleMaxClick = () => {
-    if (balance) setAmount(balance);
-  };
-
+  // Initialize Web3 when wallet client is available
   useEffect(() => {
-    if (web3 && account) {
-      // Inline fetchBalance
+    if (walletClient) {
+      const web3Instance = new Web3(walletClient.transport);
+      setWeb3(web3Instance);
+    }
+  }, [walletClient]);
+
+  // Fetch balance when connected
+  useEffect(() => {
+    if (web3 && address && chainId) {
       const fetchBalance = async () => {
         try {
           if (paymentToken.address === "0x0") {
-            const bal = await web3.eth.getBalance(account);
+            const bal = await web3.eth.getBalance(address);
             setBalance(web3.utils.fromWei(bal, "ether"));
           } else {
             const contract = new web3.eth.Contract(ERC20_ABI, paymentToken.address);
-            const bal = await contract.methods.balanceOf(account).call();
+            const bal = await contract.methods.balanceOf(address).call();
             setBalance(web3.utils.fromWei(Number(bal), paymentToken.decimals === 6 ? "mwei" : "ether"));
           }
         } catch (error) {
@@ -154,13 +97,19 @@ export default function BuyForm() {
           setBalance("0");
         }
       };
-      fetchBalance();
-    }
-  }, [paymentToken, account, web3]);
 
+      if (chainId !== 137) {
+        message.error("Please switch to Polygon Mainnet");
+        switchChain({ chainId: 137 });
+      } else {
+        fetchBalance();
+      }
+    }
+  }, [web3, address, chainId, switchChain, paymentToken]);
+
+  // Fetch UTOP amount based on input
   useEffect(() => {
-    if (web3 && amount) {
-      // Inline fetchUtopAmount
+    if (web3 && amount && chainId === 137) {
       const fetchUtopAmount = async () => {
         if (!amount || amount === "0") {
           setUtopAmount("0");
@@ -180,7 +129,86 @@ export default function BuyForm() {
     } else {
       setUtopAmount("0");
     }
-  }, [amount, paymentToken, web3]);
+  }, [amount, paymentToken, web3, chainId]);
+
+  const handleApprove = async () => {
+    if (!web3 || !address || !amount) {
+      message.error("Connect wallet and enter an amount");
+      return;
+    }
+    if (paymentToken.address === "0x0") {
+      setIsApproved(true); // POL doesn't need approval
+      return;
+    }
+    setLoading(true);
+    const weiAmount = web3.utils.toWei(amount, paymentToken.decimals === 6 ? "mwei" : "ether");
+
+    try {
+      const tokenContract = new web3.eth.Contract(ERC20_ABI, paymentToken.address);
+      const balance = await tokenContract.methods.balanceOf(address).call() as string;
+      if (BigInt(balance) < BigInt(weiAmount)) {
+        message.error("Insufficient balance");
+        setLoading(false);
+        return;
+      }
+
+      await writeContractAsync({
+        address: paymentToken.address as `0x${string}`,
+        abi: ERC20_ABI,
+        functionName: "approve",
+        args: [SALE_CONTRACT_ADDRESS, weiAmount],
+      });
+      setIsApproved(true);
+      message.success("Approved! Now click Buy");
+    } catch (error) {
+      message.error(`Error: ${(error as Error).message}`);
+    }
+    setLoading(false);
+  };
+
+  const handleBuy = async () => {
+    if (!web3 || !address || !amount) {
+      message.error("Connect wallet and enter an amount");
+      return;
+    }
+    setLoading(true);
+    const weiAmount = web3.utils.toWei(amount, paymentToken.decimals === 6 ? "mwei" : "ether");
+
+    try {
+      if (paymentToken.address === "0x0") {
+        await writeContractAsync({
+          address: SALE_CONTRACT_ADDRESS as `0x${string}`,
+          abi: UTOPV3SaleABI,
+          functionName: "buyWithPOL",
+          value: BigInt(weiAmount), // Send POL as value
+        });
+      } else if (paymentToken.symbol === "USDT") {
+        await writeContractAsync({
+          address: SALE_CONTRACT_ADDRESS as `0x${string}`,
+          abi: UTOPV3SaleABI,
+          functionName: "buyWithUSDT",
+          args: [weiAmount],
+        });
+      } else if (paymentToken.symbol === "BNB") {
+        await writeContractAsync({
+          address: SALE_CONTRACT_ADDRESS as `0x${string}`,
+          abi: UTOPV3SaleABI,
+          functionName: "buyWithBNB",
+          args: [weiAmount],
+        });
+      }
+      message.success(`Successfully purchased ${utopAmount} UTOPV3!`);
+      setAmount("");
+      setIsApproved(false);
+    } catch (error) {
+      message.error(`Error: ${(error as Error).message}`);
+    }
+    setLoading(false);
+  };
+
+  const handleMaxClick = () => {
+    if (balance) setAmount(balance);
+  };
 
   const openTokenModal = () => setModalVisible(true);
   const handleTokenSelect = (token: typeof paymentTokens[0]) => {
@@ -193,7 +221,7 @@ export default function BuyForm() {
     <>
       <div className="bg-[#25252584] p-6 rounded-2xl w-full max-w-md">
         <Title level={4} className="text-center text-white mb-4">
-          Purchase
+          {t('common.buy.title')}
         </Title>
 
         {/* Payment Token Input */}
@@ -203,7 +231,7 @@ export default function BuyForm() {
               onClick={openTokenModal}
               shape="round"
               className="flex bg-transparent items-center gap-2 border-1 text-white hover:bg-black shadow-none"
-              disabled={!account}
+              disabled={!address}
             >
               <Image src="/assets/img/icon.png" width={70} height={70} alt={paymentToken.symbol} className="w-8 h-8" />
               <Text className="text-white" strong>
@@ -217,10 +245,10 @@ export default function BuyForm() {
               variant="borderless"
               onChange={(e) => setAmount(e.target.value)}
               className="text-right text-white border-none text-lg w-1/2 placeholder-white"
-              disabled={!account}
+              disabled={!address}
             />
           </div>
-          {account && balance && (
+          {address && balance && (
             <div className="flex justify-between pt-2">
               <Text className="text-gray-400 text-sm">
                 Balance: {balance} {paymentToken.symbol}
@@ -277,17 +305,10 @@ export default function BuyForm() {
         </div>
 
         {/* Connect Wallet / Approve / Buy Button */}
-        {!account ? (
-          <Button
-            type="primary"
-            shape="round"
-            size="large"
-            block
-            className="mt-4 bg-blue-500 hover:bg-blue-600 text-black font-bold text-lg py-3"
-            onClick={connectWallet}
-          >
-            Connect Wallet
-          </Button>
+        {!isConnected ? (
+          <div className="mt-4">
+            <appkit-button /> {/* Reown's Connect Wallet button */}
+          </div>
         ) : !isApproved ? (
           <Button
             type="primary"
@@ -297,7 +318,7 @@ export default function BuyForm() {
             className="mt-4 bg-blue-500 hover:bg-blue-600 text-black font-bold text-lg py-3"
             onClick={handleApprove}
             loading={loading}
-            disabled={!amount}
+            disabled={!amount || chainId !== 137}
           >
             Approve
           </Button>
@@ -310,7 +331,7 @@ export default function BuyForm() {
             className="mt-4 bg-blue-500 hover:bg-blue-600 text-black font-bold text-lg py-3"
             onClick={handleBuy}
             loading={loading}
-            disabled={!amount}
+            disabled={!amount || chainId !== 137}
           >
             Buy
           </Button>

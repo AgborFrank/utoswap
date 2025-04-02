@@ -32,9 +32,9 @@ export default function TokenStats() {
 
   // Grid data for easier mapping
   const stats = [
-    { label: t("tsupply"), value: "10.0T", textColor: "text-white" },
-    { label: t("swappers"), value: "16.6B +", textColor: "text-white" },
-    { label: t("liquidity"), value: "$5.5K", textColor: "text-white" },
+    { label: t("tsupply"), value: "10.0T", textColor: "text-text" },
+    { label: t("swappers"), value: "16.6B +", textColor: "text-text" },
+    { label: t("liquidity"), value: "$5.5K", textColor: "text-text" },
     {
       label: t("volume"),
       value: "$1.3K",
@@ -46,17 +46,17 @@ export default function TokenStats() {
   return (
     <motion.section
       ref={ref}
-      className="max-w-screen-xl mx-auto md:px-0 px-6 py-40"
+      className="bg-grade md:px-0 px-6 py-40"
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"} // Trigger animation when in view
     >
-      <div className="flex md:flex-row flex-col gap-20">
+      <div className="flex md:flex-row flex-col gap-20 max-w-screen-xl mx-auto">
         {/* Left Side */}
         <div className="md:w-1/2 w-full">
-          <h1 className="text-5xl text-white">{t("title")}</h1>
+          <h1 className="text-5xl text-text">{t("title")}</h1>
           <div className="pt-20">
-            <p className="text-white">{t("desc")}</p>
+            <p className="text-text opacity-70">{t("desc")}</p>
             <div className="cta mt-6">
               <Link
                 href="#"
@@ -74,7 +74,7 @@ export default function TokenStats() {
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                className="rounded-xl p-6 bg-[#313131b8]"
+                className="rounded-xl p-6 bg-background"
                 variants={gridItemVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
@@ -82,7 +82,7 @@ export default function TokenStats() {
               >
                 <h3
                   className={`opacity-60 text-lg ${
-                    stat.labelColor || "text-white"
+                    stat.labelColor || "text-text"
                   }`}
                 >
                   {stat.label}

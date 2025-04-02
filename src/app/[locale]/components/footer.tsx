@@ -95,13 +95,13 @@ export default function Footer() {
   return (
     <motion.section
       ref={ref}
-      className="font-mon bg-gradient-to-b from-black to-[#161103] pb-8"
+      className="font-mon bg-gradient-to-b from-background to-grade pb-8"
       variants={sectionVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
     >
       <div className="bg-transparent">
-        <footer className="relative overflow-hidden px-10 pt-16 text-white bg-transparent max-w-screen-xl mx-auto">
+        <footer className="relative overflow-hidden px-10 pt-16 text-text bg-transparent max-w-screen-xl mx-auto">
           <div className="divide-gray-700 text-sm md:text-base">
             <div className="grid grid-cols-2 gap-8 pb-20 lg:grid-cols-6">
               {/* Brand and Description */}
@@ -116,7 +116,7 @@ export default function Footer() {
                 <Link href="/" title={t("brandTitle") || "Utopos"}>
                   <Image src="/assets/img/footer.png" alt={t("brandAlt") || "Utoswap"} width={150} height={60} />
                 </Link>
-                <p className="text-center text-sm lg:text-left mt-4">
+                <p className="text-center text-sm text-text opacity-70 lg:text-left mt-4">
                   {t("description") || "Bridge your UTOP tokens from V1/V2 to V3 on Polygon."}
                 </p>
 
@@ -131,7 +131,7 @@ export default function Footer() {
                       custom={index + 1} // Stagger social icons slightly after brand
                     >
                       <Link href={href} target="_blank" rel="noreferrer" aria-label={t(`social.${labelKey}`) || labelKey}>
-                        <Icon icon={icon} width="32" height="32" className="text-white" />
+                        <Icon icon={icon} width="32" height="32" className="text-text opacity-70" />
                       </Link>
                     </motion.li>
                   ))}
@@ -151,7 +151,7 @@ export default function Footer() {
                     animate={isInView ? "visible" : "hidden"}
                     custom={sectionIndex + 1} // Stagger each column
                   >
-                    <h3 className="text-xs font-medium text-white capitalize brightness-125 md:text-[16px]">
+                    <h3 className="text-xs font-medium text-text capitalize brightness-125 md:text-[16px]">
                       {t(`${section}.title`) || section}
                     </h3>
                     <ul className="space-y-3">
@@ -161,7 +161,7 @@ export default function Footer() {
                             href={href}
                             target={external ? "_blank" : undefined}
                             rel={external ? "noreferrer" : undefined}
-                            className="font-normal text-sm"
+                            className="font-normal text-text opacity-70 text-sm"
                           >
                             {section === "app"
                               ? tapp(labelKey) || tNav(labelKey) || labelKey
@@ -181,27 +181,27 @@ export default function Footer() {
 
             {/* Footer Legal and Disclaimer */}
             <motion.div
-              className="text-xs py-3 text-white flex md:flex-row flex-col gap-20 w-full justify-between"
+              className="text-xs py-3 text-text flex md:flex-row flex-col gap-20 w-full justify-between"
               variants={contentVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               custom={5} // After the link sections
             >
-              <div className="des">
-                <p>{t("text1") || "UTOP Bridge is a decentralized app."}</p>
+              <div className="des text-text opacity-70">
+                <p className="text-text opacity-70">{t("text1") || "UTOP Bridge is a decentralized app."}</p>
               </div>
               <LocaleSwitcherSelect defaultValue="key" label={t("languageLabel") || "English"} />
             </motion.div>
 
             <motion.div
-              className="flex flex-col items-center text-sm font-light text-gray-400 gap-4 mt-6 md:flex-row justify-between pt-3"
+              className="flex flex-col items-center text-sm font-light text-text opacity-70 gap-4 mt-6 md:flex-row justify-between pt-3"
               
               variants={contentVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               custom={6} // Last item
             >
-              <p>
+              <p className="text-text opacity-70">
                 © {new Date().getFullYear()} {t("copyright.text") || "UTOP Bridge. All rights reserved."}
               </p>
             </motion.div>
