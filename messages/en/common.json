@@ -1,0 +1,146 @@
+{
+  "Navigation": {
+     "bridge": "UTOP Bridge",
+     "history": "History",
+     "swap": "Swap",
+     "docs": "Docs",
+     "support": "Support",
+     "login": "Login",
+     "signup": "Register Now",
+     "connectWallet": "Connect Wallet",
+     "help": "Help",
+     "Logout": "Logout",
+     "label": "English",
+     "language": {
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "key": "Language"
+     }
+  },
+  "footer": {
+      "description": "Utopos aims to build the world's first futuristic, eco-friendly blockchain city where everyone can explore the city and perform everyday activities in a virtual space (Metaverse). Members earn rewards from various activities in UTOP, which is its native currency. Utopos blockchain city offers equal opportunities for everyone to own real estate and carry out constructions with ease.",
+      "text1": "Utopos aims to build the world's first futuristic, eco-friendly blockchain city where everyone can explore the city and perform everyday activities in a virtual space (Metaverse). Members earn rewards from various activities in UTOP, which is its native currency. Utopos blockchain city offers equal opportunities for everyone to own real estate and carry out constructions with ease.",
+      "copyright": {
+        "text": "UTOP Bridge. All rights reserved."
+      },
+      "brandTitle": "Utoswap",
+      "brandAlt": "UTOP",
+      "languageLabel": "English",
+      "app": {
+        "title": "Products",
+        "swap": "Swap",
+        "bridge": "Bridge",
+        "buy": "Buy UTOP",
+        "stake": "Payment Gateway",
+        "liquidity": "NFT Market"
+      },
+      "exploreMore": {
+        "title": "Resources",
+        "howItWorks": "White Paper",
+        "docs": "Docs", 
+        "tokenomics": "Tokenomics",
+        "contact": "Humanitarian Hub"
+      },
+      "company": {
+        "title": "About Utopos",
+        "about": "About Us",
+        "team": "Team",
+        "support": "Support",
+        "blog": "Blog"
+      },
+      "legal": {
+        "title": "Protocol",
+        "privacy": "Vote",
+        "terms": "Governance",
+        "risk": "Developers",
+        "compliance": "Community"
+      },
+      "social": {
+        "title": "Social",
+        "twitter": "Twitter",
+        "discord": "Discord",
+        "telegram": "Telegram",
+        "github": "GitHub",
+        "medium": "Medium"
+      }
+    },
+  "home": {
+    "intro": {
+      "title": "World's First Smart City",
+      "subtitle": "Powered by Blockchain Technology",
+      "about": "About Utopos",
+      "g1": {
+        "title": "Utopos City is Built on 3 Conceptual Layers",
+        "desc": "The City uses a three-token Polygon-compliant system. It’s scalable and flexible for the possibility of migrating to a proprietary new blockchain / hard fork.",
+        "erth": "01. Dirt (ERTH)",
+        "erthDesc": "Earth represents ownership of a fractional, digitized 99-year lease on the land underneath the City.",
+        "serv": "03. Administration ($SERV)",
+        "servDesc": "The Service Token governs the Administrative layer and will be used for Consensus & voting, referendum fees, staking and many other applications.",
+        "utop": "02. Digital ($UTOP)",
+        "utopDesc": "UTOP is the native token for the digital layer, usable for city-to-city trade with other smart cities worldwide."
+        
+      },
+      "desc": ""
+    },
+    "stats": {
+      "title": "Celebrating 1000+ UTOP Holders Worldwide",
+      "desc": "Now is the time to build a new economic system from the ground up, one city at a time, based on blockchain and cryptocurrency. Blockchain technology offers new hope for individuals, businesses, and communities.",
+      "cta": "Start Trading UTOP",
+      "tsupply": "Total Supply",
+      "swappers": "All time swappers",
+      "liquidity": "Total Liquidity",
+      "volume": "24H Volume"
+    },
+    "swap": {
+      "title": "Migrate UTOP Tokens to V3",
+      "rAmt": "Receiving amount",
+      "wconnect": "Connect Wallet",
+      "migrated": "Already Migrated",
+      "approve": "Approve",
+      "migrate": "Migrate",
+      "bottom": "Connect your wallet to convert your existing UTOP V1 or V2 tokens to UTOP V3. No fee is charged during the migration process."
+    }
+  },
+  "swap": {
+    "hero_title": "Upgrade to UTOP v3: Unleash the Future of Your Tokens",
+      "hero_description": "Seamlessly migrate your existing UTOP tokens to the enhanced v3 version and unlock new features, improved security, and greater potential. Start your journey today!",
+      "migration_reasons_title": "Why Migrate to UTOP v3?",
+      "enhanced_security": {
+        "title": "Enhanced Security",
+        "description": "UTOP v3 introduces advanced security protocols to protect your assets, ensuring your tokens are safer than ever."
+      },
+      "improved_performance": {
+        "title": "Improved Performance",
+        "description": "Experience faster transactions and optimized smart contract efficiency with the upgraded v3 token, designed to outperform its predecessors."
+      },
+      "new_features": {
+        "title": "New Features",
+        "description": "Unlock exclusive functionalities like staking and governance, available only to v3 token holders, enhancing the utility of your UTOP tokens."
+      },
+      "future_proofing": {
+        "title": "Future-Proofing",
+        "description": "Stay ahead in the evolving blockchain landscape by migrating to v3, ensuring compatibility with upcoming integrations and upgrades."
+      },
+      "uniswap_trade_title": "Want to Own UTOP: Trade Now on Uniswap",
+      "uniswap_trade_description": "Easily swap your UTOP tokens on Uniswap, the leading decentralized exchange. Enjoy low fees, high liquidity, and full control over your assets.",
+      "uniswap_trade_cta": "Trade UTOP Tokens",
+      "uniswap_trade_image_alt": "Uniswap trading interface"
+    },
+    "bridge": {
+      "hero_title": "Cross-Chain Bridge for UTOP Tokens",
+      "hero_description": "Effortlessly move your UTOP tokens across blockchains with the introduction of the cross-chain bridge support for Solana and Polygon.",
+      "features": {
+        "title": "UTOP Bridge Support for Solana & Polygon Blockchains",
+        "desc": "Revolutionizing local economies with blockchain. Build a new financial future—one city at a time—powered by a secure and decentralized cryptocurrency.",
+        "cta": "Start Trading UTOP",
+        "tsupply": "Total Supply",
+        "swappers": "All-Time Swappers",
+        "liquidity": "Total Liquidity",
+        "volume": "24H Volume"
+      }
+
+    }
+    
+  
+}

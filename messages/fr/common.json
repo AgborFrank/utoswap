@@ -1,0 +1,126 @@
+{
+  "Navigation": {
+    "bridge": "Pont UTOP",
+    "history": "Historique",
+    "swap": "Échange",
+    "docs": "Documentation",
+    "support": "Support",
+    "login": "Connexion",
+    "signup": "S'inscrire maintenant",
+    "connectWallet": "Connecter le portefeuille",
+    "help": "Aide",
+    "Logout": "Déconnexion",
+    "label": "Français",
+    "language": {
+      "en": "Anglais",
+      "fr": "Français",
+      "de": "Deutsch",
+      "key": "Langue"
+    }
+  },
+  "footer": {
+    "description": "Utopos vise à construire la première ville blockchain futuriste et écologique au monde où chacun peut explorer la ville et effectuer des activités quotidiennes dans un espace virtuel (Métavers). Les membres gagnent des récompenses grâce à diverses activités en UTOP, qui est sa monnaie native. La ville blockchain Utopos offre des opportunités égales à tous pour posséder des biens immobiliers et réaliser des constructions facilement.",
+    "text1": "Utopos vise à construire la première ville blockchain futuriste et écologique au monde où chacun peut explorer la ville et effectuer des activités quotidiennes dans un espace virtuel (Métavers). Les membres gagnent des récompenses grâce à diverses activités en UTOP, qui est sa monnaie native. La ville blockchain Utopos offre des opportunités égales à tous pour posséder des biens immobiliers et réaliser des constructions facilement.",
+    "copyright": {
+      "text": "Pont UTOP. Tous droits réservés."
+    },
+    "app": {
+      "title": "Produits",
+      "swap": "Échange",
+      "bridge": "Pont",
+      "buy": "Acheter UTOP",
+      "stake": "Paiement",
+      "liquidity": "Liquidité"
+    },
+    "exploreMore": {
+      "title": "Ressources",
+      "howItWorks": "Livre blanc",
+      "docs": "Documentation",
+      "tokenomics": "Tokenomics",
+      "contact": "Centre humanitaire"
+    },
+    "company": {
+      "title": "À propos d'Utopos",
+      "about": "À propos de nous",
+      "team": "Équipe",
+      "support": "Support",
+      "blog": "Blog"
+    },
+    "legal": {
+      "title": "Protocole",
+      "privacy": "Vote",
+      "terms": "Gouvernance",
+      "risk": "Développeurs",
+      "compliance": "Communauté"
+    },
+    "social": {
+      "title": "Social",
+      "twitter": "Twitter",
+      "discord": "Discord",
+      "telegram": "Telegram",
+      "github": "GitHub",
+      "medium": "Medium"
+    }
+  },
+  "home": {
+    "intro": {
+      "title": "Première ville intelligente au monde",
+      "subtitle": "Propulsée par la technologie blockchain",
+      "about": "À propos d'Utopos",
+      "g1": {
+        "title": "La ville Utopos est construite sur 3 couches conceptuelles",
+        "desc": "La ville utilise un système à trois jetons conforme à Polygon. Il est évolutif et flexible pour permettre une éventuelle migration vers une nouvelle blockchain propriétaire / un hard fork.",
+        "erth": "01. Terre (ERTH)",
+        "erthDesc": "La Terre représente la propriété d'un bail numérisé fractionné de 99 ans sur le terrain sous la ville.",
+        "serv": "03. Administration ($SERV)",
+        "servDesc": "Le jeton de service régit la couche administrative et sera utilisé pour le consensus et le vote, les frais de référendum, le staking et de nombreuses autres applications.",
+        "utop": "02. Numérique ($UTOP)",
+        "utopDesc": "UTOP est le jeton natif de la couche numérique, utilisable pour le commerce ville-à-ville avec d'autres villes intelligentes dans le monde."
+      },
+      "desc": ""
+    },
+    "stats": {
+      "title": "Célébration de plus de 1000 détenteurs d'UTOP dans le monde",
+      "desc": "C'est le moment de construire un nouveau système économique depuis la base, une ville à la fois, basé sur la blockchain et la cryptomonnaie. La technologie blockchain offre un nouvel espoir pour les individus, les entreprises et les communautés.",
+      "cta": "Commencer à échanger UTOP",
+      "tsupply": "Offre totale",
+      "swappers": "Échangeurs de tous les temps",
+      "liquidity": "Liquidité totale",
+      "volume": "Volume 24H"
+    },
+    "swap": {
+      "title": "Migrer les jetons UTOP vers V3",
+      "rAmt": "Montant reçu",
+      "wconnect": "Connecter le portefeuille",
+      "migrated": "Déjà migré",
+      "approve": "Approuver",
+      "migrate": "Migrer",
+      "bottom": "Connectez votre portefeuille pour convertir vos jetons UTOP V1 ou V2 existants en UTOP V3. Aucun frais n'est facturé pendant le processus de migration."
+    }
+  },
+  "swap": {
+    "hero_title": "Passez à UTOP v3 : Libérez l'avenir de vos jetons",
+      "hero_description": "Migrez facilement vos jetons UTOP existants vers la version améliorée v3 et débloquez de nouvelles fonctionnalités, une sécurité renforcée et un potentiel accru. Commencez votre voyage dès aujourd'hui !",
+      "migration_reasons_title": "Pourquoi migrer vers UTOP v3 ?",
+      "enhanced_security": {
+        "title": "Sécurité renforcée",
+        "description": "UTOP v3 introduit des protocoles de sécurité avancés pour protéger vos actifs, garantissant que vos jetons sont plus sûrs que jamais."
+      },
+      "improved_performance": {
+        "title": "Performance améliorée",
+        "description": "Profitez de transactions plus rapides et d'une efficacité optimisée des contrats intelligents avec le jeton v3 amélioré, conçu pour surpasser ses prédécesseurs."
+      },
+      "new_features": {
+        "title": "Nouvelles fonctionnalités",
+        "description": "Déverrouillez des fonctionnalités exclusives comme le staking et la gouvernance, disponibles uniquement pour les détenteurs de jetons v3, améliorant l'utilité de vos jetons UTOP."
+      },
+      "future_proofing": {
+        "title": "Préparation pour l'avenir",
+        "description": "Restez en avance dans le paysage évolutif de la blockchain en migrant vers v3, assurant la compatibilité avec les futures intégrations et mises à jour."
+      },
+      "uniswap_trade_title": "Échangez UTOP sur Uniswap",
+      "uniswap_trade_description": "Échangez facilement vos jetons UTOP sur Uniswap, la principale plateforme d'échange décentralisée. Profitez de frais réduits, d'une forte liquidité et d'un contrôle total sur vos actifs.",
+      "uniswap_trade_cta": "Échanger maintenant",
+      "uniswap_trade_image_alt": "Interface de trading Uniswap"
+    }
+}

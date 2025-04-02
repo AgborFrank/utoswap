@@ -1,0 +1,41 @@
+{
+    "completeProfile": "Please add your phone number to continue.",
+    "addPhoneNumberDesc": "Add your phone number to receive notifications and updates.",
+    "clickHere": "Click here",
+    "toAddPhoneNumber": "to add your phone number.",
+    "save": "Save",
+    "saveDetail": "Save Details",
+    "addPhoneNumber": "Add Phone Number",
+    "phoneNumber": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "profileSetup": "Addrezza profile setup",
+
+    "sidebar": {
+    "dashboard": "Dashboard",
+    "customers": "Customers",
+    "orders": "Orders",
+    "store": "Store",
+    "mySales": "My Sales",
+    "withdrawal": "Withdrawal",
+    "referral": "Referral",
+    "settings": "Settings",
+    "support": "Support",
+    "logout": "Logout",
+    "id_number": "Identification Number:"
+  },
+  "settings": {
+         "title": "Manage Settings",
+         "desc_1": "Manage your addrezza profile. Keep your profile up-to-date to get the full benefits of your account."
+   },
+   "users": {
+        "title": "Manage Users",
+        "desc_1": "Manage users that have registered from your affiliate code"
+   },
+  "dashboard": {
+    "welcome": "Affiliate Dashboard",
+    "desc_1": "Here are the stats of your account",
+    "registered": "Recent users",
+    "desc_2": "Manage recently joined users you have registered"
+  }
+
+}

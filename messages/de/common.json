@@ -1,0 +1,101 @@
+{
+    "Navigation": {
+      "bridge": "UTOP-Brücke",
+      "history": "Verlauf",
+      "swap": "Tauschen",
+      "docs": "Dokumentation",
+      "support": "Support",
+      "login": "Anmelden",
+      "signup": "Jetzt registrieren",
+      "connectWallet": "Wallet verbinden",
+      "help": "Hilfe",
+      "Logout": "Abmelden",
+      "label": "Deutsch",
+      "language": {
+        "en": "Englisch",
+        "fr": "Französisch",
+        "de": "Deutsch",
+        "key": "Sprache"
+      }
+    },
+    "footer": {
+      "description": "Utopos strebt an, die weltweit erste futuristische, umweltfreundliche Blockchain-Stadt zu schaffen, in der jeder die Stadt erkunden und alltägliche Aktivitäten in einem virtuellen Raum (Metaverse) durchführen kann. Mitglieder verdienen Belohnungen durch verschiedene Aktivitäten in UTOP, der nativen Währung. Die Blockchain-Stadt Utopos bietet gleiche Chancen für alle, Immobilien zu besitzen und Bauprojekte einfach umzusetzen.",
+      "text1": "Utopos strebt an, die weltweit erste futuristische, umweltfreundliche Blockchain-Stadt zu schaffen, in der jeder die Stadt erkunden und alltägliche Aktivitäten in einem virtuellen Raum (Metaverse) durchführen kann. Mitglieder verdienen Belohnungen durch verschiedene Aktivitäten in UTOP, der nativen Währung. Die Blockchain-Stadt Utopos bietet gleiche Chancen für alle, Immobilien zu besitzen und Bauprojekte einfach umzusetzen.",
+      "copyright": {
+        "text": "UTOP-Brücke. Alle Rechte vorbehalten."
+      },
+      "app": {
+        "title": "Produkte",
+        "swap": "Tauschen",
+        "bridge": "Brücke",
+        "buy": "UTOP kaufen",
+        "stake": "Zahlung",
+        "liquidity": "Liquidität"
+      },
+      "exploreMore": {
+        "title": "Ressourcen",
+        "howItWorks": "Whitepaper",
+        "docs": "Dokumentation",
+        "tokenomics": "Tokenomics",
+        "contact": "Humanitärer Hub"
+      },
+      "company": {
+        "title": "Über Utopos",
+        "about": "Über uns",
+        "team": "Team",
+        "support": "Support",
+        "blog": "Blog"
+      },
+      "legal": {
+        "title": "Protokoll",
+        "privacy": "Abstimmung",
+        "terms": "Governance",
+        "risk": "Entwickler",
+        "compliance": "Gemeinschaft"
+      },
+      "social": {
+        "title": "Sozial",
+        "twitter": "Twitter",
+        "discord": "Discord",
+        "telegram": "Telegram",
+        "github": "GitHub",
+        "medium": "Medium"
+      }
+    },
+    "home": {
+      "intro": {
+        "title": "Weltweit erste Smart City",
+        "subtitle": "Unterstützt von Blockchain-Technologie",
+        "about": "Über Utopos",
+        "g1": {
+          "title": "Die Stadt Utopos basiert auf 3 konzeptionellen Ebenen",
+          "desc": "Die Stadt verwendet ein Drei-Token-System, das mit Polygon kompatibel ist. Es ist skalierbar und flexibel, um eine mögliche Migration zu einer neuen, eigenen Blockchain / einem Hard Fork zu ermöglichen.",
+          "erth": "01. Erde (ERTH)",
+          "erthDesc": "Erde repräsentiert den Besitz eines fraktionierten, digitalisierten 99-Jahres-Pachtvertrags für das Land unter der Stadt.",
+          "serv": "03. Verwaltung ($SERV)",
+          "servDesc": "Der Service-Token steuert die Verwaltungsebene und wird für Konsens & Abstimmungen, Referendumgebühren, Staking und viele andere Anwendungen genutzt.",
+          "utop": "02. Digital ($UTOP)",
+          "utopDesc": "UTOP ist der native Token der digitalen Ebene, verwendbar für den Handel zwischen Städten mit anderen Smart Cities weltweit."
+        },
+        "desc": ""
+      },
+      "stats": {
+        "title": "Feier von über 1000 UTOP-Inhabern weltweit",
+        "desc": "Jetzt ist die Zeit, ein neues Wirtschaftssystem von Grund auf aufzubauen, eine Stadt nach der anderen, basierend auf Blockchain und Kryptowährung. Die Blockchain-Technologie bietet neue Hoffnung für Einzelpersonen, Unternehmen und Gemeinschaften.",
+        "cta": "Mit UTOP handeln beginnen",
+        "tsupply": "Gesamtangebot",
+        "swappers": "Tauscher aller Zeiten",
+        "liquidity": "Gesamtliquidität",
+        "volume": "24-Stunden-Volumen"
+      },
+      "swap": {
+        "title": "UTOP-Token auf V3 migrieren",
+        "rAmt": "Empfangsbetrag",
+        "wconnect": "Wallet verbinden",
+        "migrated": "Bereits migriert",
+        "approve": "Genehmigen",
+        "migrate": "Migrieren",
+        "bottom": "Verbinden Sie Ihr Wallet, um Ihre bestehenden UTOP V1- oder V2-Token in UTOP V3 umzuwandeln. Während des Migrationsprozesses fallen keine Gebühren an."
+      }
+    }
+  }

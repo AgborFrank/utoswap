@@ -1,0 +1,150 @@
+{
+    "Hero":{
+        "title": "The #1 family safety and home address solution.",
+        "description": "The smart Address system that connects you Anywhere, Anytime. Addrezza is offering Individuals, Businesses, and Institutions with the power of a precise locations and addressing system.",
+        "button": "Reserve Address",
+        "cta": "Download Pre-App"
+    },
+    "userTypes": {
+    "title": "Who we serve",
+    "description": "Addrezza serves individuals, businesses, and institutions with tailored solutions.",
+    "individual": {
+        "title": "Individuals",
+        "description": "Get a unique address for mail, packages, and sharing your location."
+    },
+    "business": {
+        "title": "Businesses",
+        "description": "Manage deliveries, inventory, and share locations with customers."
+    },
+    "finance": {
+        "title": "Financial Institutions",
+        "description": "Secure addresses for identity verification, transactions, and account management."
+    },
+    "government": {
+        "title": "Government Agencies",
+        "description": "Streamline service delivery, regulation enforcement, and resource management."
+    },
+    "healthcare": {
+        "title": "Healthcare Providers",
+        "description": "Ensure accurate care delivery, record management, and service coordination."
+    },
+    "logistics": {
+        "title": "Logistics Companies",
+        "description": "Track shipments, optimize routes, and manage fleets efficiently."
+    }
+},
+  "Solution": {
+    "title": "  “Everyone deserves to be found” ",
+    "p1": "Addrezza offers GPS-ENABLED smart devices for accurate front door location addresses.",
+    "p2": "The Addrezza Kare One device will serve as your permanent globally recognized home address for Individuals, homes, business, and things. Usable offline for seamless geolocation and constant accessibility."
+  },
+  "Services": {
+    "title": "Our Services",
+    "description": "We provide a wide range of services to meet your needs.",
+    "homeAddressing": {
+      "title": "Home Addressing",
+      "description": "A secured and reliable alternative for homeowners. Be like the rest of the world and have a sharable Address"
+    },
+    "deliveryLogistics": {
+      "title": "Delivery and Logistics",
+      "description": "Order and have your groceries, packages, and parcels delivered to your front door"
+    },
+    "protectLovedOnes": {
+      "title": "Protect Your Loved Ones",
+      "description": "From your friends, kids, aged family, pets, etc, know where they are all the time and keep them safe"
+    },
+    "medicalEmergency": {
+      "title": "Medical Emergency",
+      "description": "Your health is our priority. Addrezza devices will bring medical services, Police safety, fire trucks, etc right to you."
+    },
+    "findMissingItems": {
+      "title": "Find Missing Items",
+      "description": "Never lose any item again with Addrezza. Our mini devices will help you tag, and find anything from phones, keys, backpack, etc."
+    },
+    "healthcare": {
+      "title": "Healthcare",
+      "description": "We provide healthcare services."
+    }
+  },
+  "Products": {
+    "h2": "Our Products",
+    "p": "We offer a wide range of products to meet your needs.",
+    "kareOne": {
+      "title": "Kare One",
+      "description": "Your alternate home address system and management tool"
+    },
+    "kareTwo": {
+      "title": "Kare Two",
+      "description": "Designed for friends, aged family members, kids, pets, and other home items."
+    },
+    "kareThree": {
+      "title": "Kare Three",
+      "description": "Modern gps wristbands for children. The safety of our kids is most important track, know where they are all the time."
+    },
+    "kareFour": {
+      "title": "iKare",
+      "description": "Smart GPS and Health Monitoring wristwatches best for luxury gifts"
+    },
+    "kareFive": {
+      "title": "Dash One",
+      "description": "Ideal for fleet management and car tracking solutions"
+    },
+    "kareSix": {
+      "title": "Kare Three",
+      "description": "The Kare Three device is a GPS-enabled smart device that provides accurate front door location addresses."
+    }
+  },
+  "howItWorks": {
+    "title": "How it Works",
+    "description": "We provide a wide range of services to meet your needs.",
+    "stepOne": {
+      "title": "Reserve Your Address",
+      "description": "Order and reserve your Addrezza home address"
+    },
+    "stepTwo": {
+      "title": "Get the App",
+      "description": "Get the Addrezza mobile app and setup your account"
+    },
+    "stepThree": {
+      "title": "Activate Your Address",
+      "description": "Receive and activate your Addrezza home address"
+    },
+    "stepFour": {
+      "title": "Start Using",
+      "description": "Start managing your home and address"
+    }
+  },
+  "closing": {
+    "title": "Ready to join the future of Addressing?",
+    "description": "The future of Addressing is here. Let's connect Africa like America, UK, and the rest of the world. We can't wait for the world to catch up to us anymore, we must take giant leaps to meet the rest of the world and Addrezza is the beginning to connect you with anyone, anywhere in Real-time.",
+    "button": "Pre-Order Now -20% OFF"
+  },
+  "benefits": {
+    "title": "Why you should get your Addrezza devices",
+    "description": "We provide a wide range of services to meet your needs.",
+    "benefitOne": {
+      "title": "Alternate Home Address",
+      "description": "Own a sharable Home address and have people meet you right at home."
+    },
+    "benefitTwo": {
+      "title": "Precision Location Services",
+      "description": "Accurately find anyone and anything in your care"
+    },
+    "benefitThree": {
+      "title": "Security",
+      "description": "Decide who comes to your location"
+    },
+    "benefitFour": {
+      "title": "Opportunities",
+      "description": "Access local and global income generating opportunities."
+    },
+    "benefitFive": {
+      "title": "Commerce",
+      "description": "Let's revolutionize shopping, and get your orders delivered to your home"
+    }
+  },
+  "action": {
+    "button": "Pre-Order Now -20% OFF"
+  }
+}
+

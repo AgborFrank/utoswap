@@ -1,0 +1,154 @@
+{
+    "Hero": {
+        "title": "Système d'adresse résidentielle Addrezza.",
+        "description": "Le système d'adresse intelligent qui vous connecte partout, à tout moment. Addrezza offre aux particuliers, entreprises et institutions le pouvoir d'une localisation et d'un système d'adressage précis.",
+        "button": "Réserver une adresse",
+        "cta": "Télécharger la pré-application"
+    },
+    "userTypes": {
+        "title": "Qui peut utiliser Addrezza ?",
+        "description": "Addrezza propose des solutions adaptées aux particuliers, entreprises et institutions.",
+        "individual": {
+            "title": "Particuliers",
+            "description": "Obtenez une adresse unique pour le courrier, les colis et le partage de votre localisation."
+        },
+        "business": {
+            "title": "Entreprises",
+            "description": "Gérez les livraisons, les stocks et partagez votre localisation avec vos clients."
+        },
+        "finance": {
+            "title": "Institutions financières",
+            "description": "Adresses sécurisées pour la vérification d'identité, les transactions et la gestion des comptes."
+        },
+        "government": {
+            "title": "Agences gouvernementales",
+            "description": "Optimisez la prestation de services, l'application des réglementations et la gestion des ressources."
+        },
+        "healthcare": {
+            "title": "Professionnels de la santé",
+            "description": "Assurez une livraison précise des soins, la gestion des dossiers et la coordination des services."
+        },
+        "logistics": {
+            "title": "Entreprises logistiques",
+            "description": "Suivez les expéditions, optimisez les itinéraires et gérez vos flottes efficacement."
+        }
+    },
+    
+        "Solution": {
+          "title": "« Tout le monde mérite d'être trouvé »",
+          "p1": "Addrezza propose des dispositifs intelligents ÉQUIPÉS DE GPS pour localiser avec précision les adresses de porte d'entrée.",
+          "p2": "Le dispositif Addrezza Kare One servira de domicile permanent et d'adresse reconnue mondialement pour les individus, les maisons, les entreprises et les objets. Utilisable hors ligne pour une géolocalisation fluide et un accès constant."
+        },
+        "Services": {
+          "title": "Nos Services",
+          "description": "Nous proposons une large gamme de services pour répondre à vos besoins.",
+          "homeAddressing": {
+            "title": "Adressage de Domicile",
+            "description": "Une alternative sécurisée et fiable pour les propriétaires. Soyez comme le reste du monde et obtenez une adresse partageable."
+          },
+          "deliveryLogistics": {
+            "title": "Livraison et Logistique",
+            "description": "Commandez et faites livrer vos courses, colis et paquets directement à votre porte."
+          },
+          "protectLovedOnes": {
+            "title": "Protégez Vos Proches",
+            "description": "Qu'il s'agisse de vos amis, enfants, famille âgée, animaux de compagnie, etc., sachez toujours où ils se trouvent et assurez leur sécurité."
+          },
+          "medicalEmergency": {
+            "title": "Urgences Médicales",
+            "description": "Votre santé est notre priorité. Les dispositifs Addrezza feront venir les services médicaux, la police, les pompiers, etc., directement à vous."
+          },
+          "findMissingItems": {
+            "title": "Retrouvez les Objets Perdus",
+            "description": "Ne perdez plus jamais un objet avec Addrezza. Nos mini-dispositifs vous aideront à marquer et retrouver tout, des téléphones aux clés, sacs à dos, etc."
+          },
+          "healthcare": {
+            "title": "Soins de Santé",
+            "description": "Nous offrons des services de soins de santé."
+          }
+        },
+        "Products": {
+    "h2": "Nos Produits",
+    "p": "Nous proposons une large gamme de produits pour répondre à vos besoins.",
+    "kareOne": {
+      "title": "Kare One",
+      "description": "Votre système alternatif d'adresse domicile et outil de gestion."
+    },
+    "kareTwo": {
+      "title": "Kare Two",
+      "description": "Conçu pour les amis, les membres âgés de la famille, les enfants, les animaux de compagnie et autres objets domestiques."
+    },
+    "kareThree": {
+      "title": "Kare Three",
+      "description": "Bracelets GPS modernes pour enfants. La sécurité de nos enfants est primordiale : suivez-les et sachez où ils se trouvent en tout temps."
+    },
+    "kareFour": {
+      "title": "iKare",
+      "description": "Montres intelligentes GPS et de surveillance de la santé, idéales comme cadeaux de luxe."
+    },
+    "kareFive": {
+      "title": "Dash One",
+      "description": "Idéal pour la gestion de flotte et les solutions de suivi des véhicules."
+    },
+    "kareSix": {
+      "title": "Kare Three",
+      "description": "Le dispositif Kare Three est un appareil intelligent équipé de GPS qui fournit des adresses précises pour localiser les portes d'entrée."
+    }
+  },
+  "howItWorks": {
+  "title": "Comment ça fonctionne",
+  "description": "Nous proposons une large gamme de services pour répondre à vos besoins.",
+  "stepOne": {
+    "title": "Commander un appareil :",
+    "description": "Choisissez l'appareil Addrezza adapté à vos besoins."
+  },
+  "stepTwo": {
+    "title": "Télécharger l'application",
+    "description": "Obtenez l'application mobile Addrezza pour iOS ou Android."
+  },
+  "stepThree": {
+    "title": "Activer votre appareil",
+    "description": "Activez votre appareil en suivant nos étapes simples à utiliser."
+  },
+  "stepFour": {
+    "title": "Commencez à utiliser",
+    "description": "Commencez à gérer votre maison et vos biens."
+  }
+},
+"closing": {
+    "title": "Prêt à rejoindre le futur de l'adressage ?",
+    "description": "Le futur de l'adressage est là. Connectons l'Afrique comme l'Amérique, le Royaume-Uni et le reste du monde. Nous ne pouvons plus attendre que le monde nous rattrape, nous devons faire des pas de géant pour rencontrer le reste du monde, et Addrezza est le début pour vous connecter avec n'importe qui, n'importe où, en temps réel.",
+    "button": "Précommandez maintenant et obtenez 20% de réduction"
+},
+"benefits": {
+    "title": "Pourquoi vous devriez adopter les appareils Addrezza",
+    "description": "Nous offrons une large gamme de services pour répondre à vos besoins.",
+    "benefitOne": {
+        "title": "Adresse domiciliaire alternative",
+        "description": "Possédez une adresse domiciliaire partageable et permettez aux gens de vous retrouver directement chez vous."
+    },
+    "benefitTwo": {
+        "title": "Services de localisation précis",
+        "description": "Trouvez avec précision toute personne ou tout objet sous votre responsabilité."
+    },
+    "benefitThree": {
+        "title": "Sécurité",
+        "description": "Décidez qui peut accéder à votre emplacement."
+    },
+    "benefitFour": {
+        "title": "Accessibilité",
+        "description": "Conçu pour les régions mal desservies à des tarifs abordables."
+    },
+    "benefitFive": {
+        "title": "Commerce",
+        "description": "Révolutionnons le shopping et faites livrer vos commandes directement chez vous."
+    }
+},
+"action": {
+    "button": "Précommandez maintenan"
+}
+
+
+      
+      
+}
