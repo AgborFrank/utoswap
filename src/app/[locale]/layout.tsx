@@ -9,7 +9,8 @@ import { ConfigProvider } from "antd";
 import "../globals.css";
 import { Providers } from "../../providers";
 import { routing } from "../../i18n/routing";
-import WagmiClientProvider from "./components/WagmiClientProvider";
+import { headers } from 'next/headers' // added
+import ContextProvider from "../../../context";
 
 // Fonts
 const dmsans = DM_Sans({
@@ -118,6 +119,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
     console.error("Failed to load messages for locale:", locale, error);
     messages = await loadMessages("en");
   }
+  const headersObj = await headers();
+  const cookies = headersObj.get('cookie')
 
   return (
     <html lang={locale} data-theme="light">
@@ -127,9 +130,6 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="theme-color" content="#000000FF" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black" />
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#e8c56b" />
         <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png" />
       </head>
       <body
@@ -152,9 +152,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         >
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <NextIntlClientProvider locale={locale} messages={messages}>
-              <WagmiClientProvider>
+              <ContextProvider cookies={cookies}>
                 <Providers>{children}</Providers>
-              </WagmiClientProvider>
+              </ContextProvider>
             </NextIntlClientProvider>
           </ErrorBoundary>
         </ConfigProvider>

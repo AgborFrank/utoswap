@@ -1,4 +1,4 @@
-"use client"; // Required for Framer Motion
+"use client";
 
 import { useState } from "react";
 import { Button, Link } from "@heroui/react";
@@ -6,22 +6,21 @@ import { useLocale, useTranslations } from "next-intl";
 import { Icon } from "@iconify/react";
 import LocaleSwitcherSelect from "./LocaleSwitcherSelect";
 import Image from "next/image";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { useAppKit, useAppKitAccount, useDisconnect } from "@reown/appkit/react"; // Reown hooks
 import { motion } from "framer-motion";
 
-// Animation variants for the header
+// Animation variants (unchanged)
 const headerVariants = {
   hidden: { opacity: 0, y: -50 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-// Animation variants for the mobile menu
 const mobileMenuVariants = {
   hidden: { opacity: 0, y: -20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.3, type: "spring", stiffness: 120 },
+    transition: { duration: 0.3, ease: "easeOut" },
   },
   exit: {
     opacity: 0,
@@ -30,7 +29,6 @@ const mobileMenuVariants = {
   },
 };
 
-// Animation variants for menu items (staggered effect)
 const menuItemVariants = {
   hidden: { opacity: 0, x: -20 },
   visible: (i: number) => ({
@@ -44,15 +42,10 @@ export default function Header() {
   const t = useTranslations("common.Navigation");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const locale = useLocale();
-  const { address, isConnected } = useAccount();
-  const { connect, connectors } = useConnect();
-  const { disconnect } = useDisconnect();
+  const { address, isConnected } = useAppKitAccount(); // Reown hook for account info
+  const { disconnect } = useDisconnect(); // Reown hook for disconnecting
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-
-  const handleConnect = () => {
-    connect({ connector: connectors[0] });
-  };
 
   const handleDisconnect = () => {
     disconnect();
@@ -108,12 +101,7 @@ export default function Header() {
               </Button>
             </div>
           ) : (
-            <Button
-              onPress={handleConnect}
-              className="bg-cta/20 text-cta px-4 py-2 rounded-full hover:bg-cta/50 shadow-lg transition-colors"
-            >
-              {t("connectWallet")}
-            </Button>
+            <appkit-button />
           )}
         </div>
         <Button
@@ -165,12 +153,7 @@ export default function Header() {
                   </Button>
                 </div>
               ) : (
-                <Button
-                  onPress={handleConnect}
-                  className="bg-cta text-black px-4 py-2 rounded-md hover:bg-cta block text-center"
-                >
-                  {t("connectWallet")}
-                </Button>
+                <appkit-button /> 
               )}
               <div className="mt-4">
                 <LocaleSwitcherSelect defaultValue={locale} label={t("label")} />

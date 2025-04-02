@@ -11,7 +11,9 @@
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.9",
     "@heroui/react": "^2.7.5",
-    "@tanstack/react-query": "^5.69.0",
+    "@reown/appkit": "^1.7.1",
+    "@reown/appkit-adapter-wagmi": "^1.7.1",
+    "@tanstack/react-query": "^5.71.1",
     "@types/web3": "^1.0.20",
     "@wagmi/connectors": "^5.7.11",
     "@wagmi/core": "^2.16.7",
@@ -26,8 +28,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-error-boundary": "^5.0.0",
-    "viem": "^2.23.14",
-    "wagmi": "^2.14.15",
+    "viem": "^2.24.3",
+    "wagmi": "^2.14.16",
     "web3": "^4.16.0",
     "web3modal": "^1.9.12"
   },
