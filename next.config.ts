@@ -26,9 +26,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  output: 'export',
-  distDir: 'build',
-  trailingSlash: true,
+  // Add other config options here if needed
 };
 
 // Export the config with both plugins applied
