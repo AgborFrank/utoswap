@@ -127,6 +127,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="theme-color" content="#000000FF" />
         <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png" />
       </head>
       <body

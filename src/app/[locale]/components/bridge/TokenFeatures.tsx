@@ -86,7 +86,7 @@ export default function TokenFeatures() {
 
         {/* Right Side - Grid */}
         <div className="md:w-1/2 w-full">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}

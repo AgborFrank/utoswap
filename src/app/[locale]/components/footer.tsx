@@ -107,7 +107,7 @@ export default function Footer() {
               {/* Brand and Description */}
               <motion.div
                 className="col-span-2 place-self-center lg:place-self-auto"
-                style={{ zIndex: 1000 }}
+                
                 variants={contentVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
@@ -145,7 +145,7 @@ export default function Footer() {
                   <motion.div
                     key={section}
                     className="col-span-1 space-y-4"
-                    style={{ zIndex: 1000 }}
+                   
                     variants={contentVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
@@ -181,8 +181,7 @@ export default function Footer() {
 
             {/* Footer Legal and Disclaimer */}
             <motion.div
-              className="text-xs py-3 text-white flex flex-row gap-20 w-full justify-between"
-              style={{ zIndex: 1000 }}
+              className="text-xs py-3 text-white flex md:flex-row flex-col gap-20 w-full justify-between"
               variants={contentVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
@@ -196,7 +195,7 @@ export default function Footer() {
 
             <motion.div
               className="flex flex-col items-center text-sm font-light text-gray-400 gap-4 mt-6 md:flex-row justify-between pt-3"
-              style={{ zIndex: 1000 }}
+              
               variants={contentVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
