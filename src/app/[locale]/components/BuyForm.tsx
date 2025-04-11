@@ -226,7 +226,7 @@ export default function BuyForm() {
           </h1>
         </div>
       </div>
-      <div className="bg-[#252525] p-6 rounded-2xl w-full max-w-md">
+      <div className="bg-grade p-6 rounded-2xl w-full max-w-md">
         <Title level={4} className="text-center text-white mb-4">
           Purchase
         </Title>

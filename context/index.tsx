@@ -18,8 +18,8 @@ if (!projectId) {
 // Set up metadata
 const metadata = {
   name: 'Utoswap',
-  description: 'AppKit Example',
-  url: 'https://appkitexampleapp.com', // origin must match your domain & subdomain
+  description: 'UTOSWAP',
+  url: 'https://www.utoswap.com', // origin must match your domain & subdomain
   icons: ["/assets/icons/icon-192x192.png"],
 }
 

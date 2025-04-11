@@ -36,7 +36,7 @@ export default function SwapForm() {
   const { address, isConnected } = useAppKitAccount();
 
   // Wagmi hooks
-  const chainId = useChainId(); // Get chainId from Wagmi
+  const chainId = useChainId();
   const { switchChain } = useSwitchChain();
   const { writeContractAsync } = useWriteContract();
   const { data: walletClient } = useWalletClient();
@@ -49,7 +49,7 @@ export default function SwapForm() {
     }
   }, [walletClient]);
 
-  // Fetch balance and migration status when connected
+  // Fetch balance, migration status, and allowance when connected
   useEffect(() => {
     if (web3 && address && chainId) {
       const fetchBalance = async () => {
@@ -60,6 +60,7 @@ export default function SwapForm() {
         } catch (error) {
           console.error("Balance fetch error:", error);
           setBalance("0");
+          message.error("Failed to fetch balance");
         }
       };
 
@@ -75,15 +76,35 @@ export default function SwapForm() {
         }
       };
 
-      if (chainId !== 137) {
-        message.error("Please switch to Polygon Mainnet");
-        switchChain({ chainId: 137 }); // Prompt switch to Polygon
-      } else {
-        fetchBalance();
-        checkMigrationStatus();
-      }
+      const checkAllowance = async () => {
+        const contract = new web3.eth.Contract(ERC20_ABI, fromToken.address);
+        try {
+          const allowance = await contract.methods.allowance(address, UTOPV3_ADDRESS).call();
+          const weiAmount = fromAmount ? web3.utils.toWei(fromAmount, "ether") : "0";
+          setIsApproved(BigInt(allowance) >= BigInt(weiAmount));
+        } catch (error) {
+          console.error("Allowance check error:", error);
+          setIsApproved(false);
+        }
+      };
+
+      const checkChainAndFetch = async () => {
+        if (chainId !== 137) {
+          message.error("Please switch to Polygon Mainnet");
+          try {
+            await switchChain({ chainId: 137 });
+          } catch (switchError) {
+            console.error("Chain switch error:", switchError);
+            message.error("Failed to switch to Polygon Mainnet - please switch manually");
+            return;
+          }
+        }
+        await Promise.all([fetchBalance(), checkMigrationStatus(), checkAllowance()]);
+      };
+
+      checkChainAndFetch();
     }
-  }, [web3, address, chainId, switchChain, fromToken]);
+  }, [web3, address, chainId, switchChain, fromToken, fromAmount]);
 
   const handleApprove = async () => {
     if (!web3 || !address || !fromAmount) {
@@ -106,18 +127,23 @@ export default function SwapForm() {
         address: fromToken.address as `0x${string}`,
         abi: ERC20_ABI,
         functionName: "approve",
-        args: [UTOPV3_ADDRESS, weiAmount],
+        args: [UTOPV3_ADDRESS, BigInt(weiAmount)],
       });
       setIsApproved(true);
       message.success("Approved! Now click Migrate");
     } catch (error) {
-      message.error(`Error: ${(error as Error).message}`);
+      console.error("Approval error:", error);
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      message.error(`Approval failed: ${errorMsg.includes("reverted") ? "Transaction reverted - check allowance or balance" : errorMsg}`);
     }
     setLoading(false);
   };
 
   const handleMigration = async () => {
-    if (!web3 || !address || !fromAmount) return;
+    if (!web3 || !address || !fromAmount) {
+      message.error("Connect wallet and enter an amount");
+      return;
+    }
     setLoading(true);
     const weiAmount = web3.utils.toWei(fromAmount, "ether");
     const method = fromToken.name === "Utopos V1" ? "migrateFromV1" : "migrateFromV2";
@@ -127,13 +153,15 @@ export default function SwapForm() {
         address: UTOPV3_ADDRESS as `0x${string}`,
         abi: UTOPV3_ABI,
         functionName: method,
-        args: [weiAmount],
+        args: [BigInt(weiAmount)],
       });
       message.success(`Successfully migrated ${fromAmount} UTOP to V3!`);
       setIsApproved(false);
       setFromAmount("");
     } catch (error) {
-      message.error(`Error: ${(error as Error).message}`);
+      console.error("Migration error:", error);
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      message.error(`Migration failed: ${errorMsg.includes("reverted") ? "Transaction reverted - ensure approved and not migrated" : errorMsg}`);
     }
     setLoading(false);
   };
@@ -161,7 +189,7 @@ export default function SwapForm() {
         </Title>
 
         {/* From Input */}
-        <div className="bg-transparent p-4 rounded-xl border border-gray-500">
+        <div className="bg-gray-50 p-4 rounded-xl border border-gray-500">
           <div className="flex justify-between items-center">
             <Button
               onClick={openTokenModal}
@@ -215,7 +243,7 @@ export default function SwapForm() {
         </div>
 
         {/* To Input */}
-        <div className="bg-transparent p-4 rounded-xl border border-gray-500">
+        <div className="bg-gray-50 p-4 rounded-xl border border-gray-500">
           <div className="flex justify-between items-center">
             <Button
               shape="round"

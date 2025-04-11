@@ -33,13 +33,13 @@ export default function TokenInteraction() {
 
       {/* Toggle Buttons */}
       <div className="flex justify-center mb-6">
-        <div className="bg-[#252525] p-1 rounded-full flex gap-2">
+        <div className="bg-background shadow-md p-1 rounded-full flex gap-2">
           <Button
             shape="round"
             className={`px-6 py-2 text-lg font-bold ${
               mode === "swap"
-                ? "bg-cta/40 text-black border-none"
-                : "bg-transparent text-white border-none hover:bg-gray-700"
+                ? "bg-cta/40 text-text border-none"
+                : "bg-grade text-white border-none hover:bg-background"
             }`}
             onClick={() => setMode("swap")}
           >
@@ -50,7 +50,7 @@ export default function TokenInteraction() {
             className={`px-6 py-2 text-lg font-bold ${
               mode === "buy"
                 ? "bg-cta/40 text-black border-none"
-                : "bg-transparent border-none text-white hover:bg-gray-700"
+                : "bg-grade border-none text-white hover:bg-gray-700"
             }`}
             onClick={() => setMode("buy")}
           >
