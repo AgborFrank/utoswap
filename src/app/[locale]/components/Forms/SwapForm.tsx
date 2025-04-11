@@ -5,10 +5,21 @@ import { Button, Input, Modal, Typography, message } from "antd";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import Web3 from "web3";
-import { UTOPV3_ADDRESS, UTOPV1_ADDRESS, UTOPV2_ADDRESS, UTOPV3_ABI, ERC20_ABI } from "../../../../../lib/contracts";
+import {
+  UTOPV3_ADDRESS,
+  UTOPV1_ADDRESS,
+  UTOPV2_ADDRESS,
+  UTOPV3_ABI,
+  ERC20_ABI,
+} from "../../../../../lib/contracts";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { useChainId, useSwitchChain, useWriteContract, useWalletClient } from "wagmi";
+import {
+  useChainId,
+  useSwitchChain,
+  useWriteContract,
+  useWalletClient,
+} from "wagmi";
 import { useAppKitAccount } from "@reown/appkit/react";
 
 const { Title, Text } = Typography;
@@ -18,7 +29,11 @@ const tokenList = [
   { symbol: "UTOP", name: "Utopos V2", address: UTOPV2_ADDRESS },
 ];
 
-const UTOPV3_TOKEN = { symbol: "UTOP", name: "Utopos V3", address: UTOPV3_ADDRESS };
+const UTOPV3_TOKEN = {
+  symbol: "UTOP",
+  name: "Utopos V3",
+  address: UTOPV3_ADDRESS,
+};
 
 export default function SwapForm() {
   const t = useTranslations("common.home.swap");
@@ -50,7 +65,9 @@ export default function SwapForm() {
       const fetchBalance = async () => {
         const contract = new web3.eth.Contract(ERC20_ABI, fromToken.address);
         try {
-          const bal = await contract.methods.balanceOf(address).call() as string;
+          const bal = (await contract.methods
+            .balanceOf(address)
+            .call()) as string;
           setBalance(web3.utils.fromWei(bal, "ether"));
         } catch (error) {
           console.error("Balance fetch error:", error);
@@ -61,9 +78,12 @@ export default function SwapForm() {
 
       const checkMigrationStatus = async () => {
         const contract = new web3.eth.Contract(UTOPV3_ABI, UTOPV3_ADDRESS);
-        const method = fromToken.name === "Utopos V1" ? "hasMigratedV1" : "hasMigratedV2";
+        const method =
+          fromToken.name === "Utopos V1" ? "hasMigratedV1" : "hasMigratedV2";
         try {
-          const migrated = await contract.methods[method](address).call() as boolean;
+          const migrated = (await contract.methods[method](
+            address
+          ).call()) as boolean;
           setHasMigrated(migrated);
         } catch (error) {
           console.error("Migration status check error:", error);
@@ -74,8 +94,12 @@ export default function SwapForm() {
       const checkAllowance = async () => {
         const contract = new web3.eth.Contract(ERC20_ABI, fromToken.address);
         try {
-          const allowance = await contract.methods.allowance(address, UTOPV3_ADDRESS).call() as string;
-          const weiAmount = fromAmount ? web3.utils.toWei(fromAmount, "ether") : "0";
+          const allowance = (await contract.methods
+            .allowance(address, UTOPV3_ADDRESS)
+            .call()) as string;
+          const weiAmount = fromAmount
+            ? web3.utils.toWei(fromAmount, "ether")
+            : "0";
           setIsApproved(BigInt(allowance) >= BigInt(weiAmount));
         } catch (error) {
           console.error("Allowance check error:", error);
@@ -90,11 +114,17 @@ export default function SwapForm() {
             await switchChain({ chainId: 137 });
           } catch (switchError) {
             console.error("Chain switch error:", switchError);
-            message.error("Failed to switch to Polygon Mainnet - please switch manually");
+            message.error(
+              "Failed to switch to Polygon Mainnet - please switch manually"
+            );
             return;
           }
         }
-        await Promise.all([fetchBalance(), checkMigrationStatus(), checkAllowance()]);
+        await Promise.all([
+          fetchBalance(),
+          checkMigrationStatus(),
+          checkAllowance(),
+        ]);
       };
 
       checkChainAndFetch();
@@ -110,8 +140,13 @@ export default function SwapForm() {
     const weiAmount = web3.utils.toWei(fromAmount, "ether");
 
     try {
-      const oldTokenContract = new web3.eth.Contract(ERC20_ABI, fromToken.address);
-      const balance = await oldTokenContract.methods.balanceOf(address).call() as string;
+      const oldTokenContract = new web3.eth.Contract(
+        ERC20_ABI,
+        fromToken.address
+      );
+      const balance = (await oldTokenContract.methods
+        .balanceOf(address)
+        .call()) as string;
       if (BigInt(balance) < BigInt(weiAmount)) {
         message.error("Insufficient balance");
         setLoading(false);
@@ -129,7 +164,13 @@ export default function SwapForm() {
     } catch (error) {
       console.error("Approval error:", error);
       const errorMsg = error instanceof Error ? error.message : String(error);
-      message.error(`Approval failed: ${errorMsg.includes("reverted") ? "Transaction reverted - check allowance or balance" : errorMsg}`);
+      message.error(
+        `Approval failed: ${
+          errorMsg.includes("reverted")
+            ? "Transaction reverted - check allowance or balance"
+            : errorMsg
+        }`
+      );
     }
     setLoading(false);
   };
@@ -141,7 +182,8 @@ export default function SwapForm() {
     }
     setLoading(true);
     const weiAmount = web3.utils.toWei(fromAmount, "ether");
-    const method = fromToken.name === "Utopos V1" ? "migrateFromV1" : "migrateFromV2";
+    const method =
+      fromToken.name === "Utopos V1" ? "migrateFromV1" : "migrateFromV2";
 
     try {
       console.log("Attempting migration:", { method, weiAmount, address });
@@ -159,7 +201,13 @@ export default function SwapForm() {
     } catch (error) {
       console.error("Migration error:", error);
       const errorMsg = error instanceof Error ? error.message : String(error);
-      message.error(`Migration failed: ${errorMsg.includes("reverted") ? "Transaction reverted - ensure approved and not migrated" : errorMsg}`);
+      message.error(
+        `Migration failed: ${
+          errorMsg.includes("reverted")
+            ? "Transaction reverted - ensure approved and not migrated"
+            : errorMsg
+        }`
+      );
     }
     setLoading(false);
   };
@@ -196,7 +244,13 @@ export default function SwapForm() {
               className="flex bg-cta/20 items-center gap-2 border-none text-text hover:bg-black shadow-none"
               disabled={hasMigrated || !address}
             >
-              <Image src="/assets/img/icon.png" width={70} height={70} alt={fromToken.symbol} className="w-8 h-8" />
+              <Image
+                src="/assets/img/icon.png"
+                width={70}
+                height={70}
+                alt={fromToken.symbol}
+                className="w-8 h-8"
+              />
               <Text className="text-text" strong>
                 {fromToken.name}
               </Text>
@@ -248,7 +302,13 @@ export default function SwapForm() {
               className="flex items-center gap-2 border-none rounded-full shadow-none text-text"
               disabled
             >
-              <Image src="/assets/img/icon.png" width={60} height={60} alt={toToken.symbol} className="w-8 h-8" />
+              <Image
+                src="/assets/img/icon.png"
+                width={60}
+                height={60}
+                alt={toToken.symbol}
+                className="w-8 h-8"
+              />
               <Text className="text-text" strong>
                 {toToken.name}
               </Text>
@@ -321,7 +381,9 @@ export default function SwapForm() {
           onCancel={() => setModalVisible(false)}
           footer={null}
         >
-          <p className="mb-6">Select your holding token to migrate to upgraded UTOP V3</p>
+          <p className="mb-6">
+            Select your holding token to migrate to upgraded UTOP V3
+          </p>
           <div className="space-y-2 flex flex-col gap-2">
             {tokenList.map((token) => (
               <Button
@@ -331,7 +393,13 @@ export default function SwapForm() {
                 onClick={() => handleTokenSelect(token)}
               >
                 <div className="flex items-center gap-2">
-                  <Image src="/assets/img/icon.png" width={80} height={80} alt={token.symbol} className="w-9 h-9" />
+                  <Image
+                    src="/assets/img/icon.png"
+                    width={80}
+                    height={80}
+                    alt={token.symbol}
+                    className="w-9 h-9"
+                  />
                   {token.name}
                 </div>
                 <Text>{token.symbol}</Text>
