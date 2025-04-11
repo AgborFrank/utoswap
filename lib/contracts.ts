@@ -15,11 +15,22 @@ export const ERC20_ABI = [
     constant: false,
     inputs: [
       { name: "spender", type: "address" },
-      { name: "amount", type: "uint256" }, // Changed to uint256
+      { name: "amount", type: "uint256" },
     ],
     name: "approve",
     outputs: [{ name: "", type: "bool" }],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    constant: true,
+    inputs: [
+      { name: "owner", type: "address" },
+      { name: "spender", type: "address" },
+    ],
+    name: "allowance",
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
     type: "function",
   },
 ] as const;
@@ -27,7 +38,7 @@ export const ERC20_ABI = [
 export const UTOPV3_ABI = [
   {
     constant: false,
-    inputs: [{ name: "amount", type: "uint256" }], // Changed to uint256
+    inputs: [{ name: "amount", type: "uint256" }],
     name: "migrateFromV1",
     outputs: [],
     stateMutability: "nonpayable",
@@ -35,7 +46,7 @@ export const UTOPV3_ABI = [
   },
   {
     constant: false,
-    inputs: [{ name: "amount", type: "uint256" }], // Changed to uint256
+    inputs: [{ name: "amount", type: "uint256" }],
     name: "migrateFromV2",
     outputs: [],
     stateMutability: "nonpayable",
