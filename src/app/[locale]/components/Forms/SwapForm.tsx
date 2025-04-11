@@ -32,16 +32,12 @@ export default function SwapForm() {
   const [hasMigrated, setHasMigrated] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Reown AppKit hook for account info
   const { address, isConnected } = useAppKitAccount();
-
-  // Wagmi hooks
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
   const { writeContractAsync } = useWriteContract();
   const { data: walletClient } = useWalletClient();
 
-  // Initialize Web3 when wallet client is available
   useEffect(() => {
     if (walletClient) {
       const web3Instance = new Web3(walletClient.transport);
@@ -49,14 +45,13 @@ export default function SwapForm() {
     }
   }, [walletClient]);
 
-  // Fetch balance, migration status, and allowance when connected
   useEffect(() => {
     if (web3 && address && chainId) {
       const fetchBalance = async () => {
         const contract = new web3.eth.Contract(ERC20_ABI, fromToken.address);
         try {
-          const bal = await contract.methods.balanceOf(address).call();
-          setBalance(web3.utils.fromWei(bal.toString(), "ether"));
+          const bal = await contract.methods.balanceOf(address).call() as string;
+          setBalance(web3.utils.fromWei(bal, "ether"));
         } catch (error) {
           console.error("Balance fetch error:", error);
           setBalance("0");
@@ -68,7 +63,7 @@ export default function SwapForm() {
         const contract = new web3.eth.Contract(UTOPV3_ABI, UTOPV3_ADDRESS);
         const method = fromToken.name === "Utopos V1" ? "hasMigratedV1" : "hasMigratedV2";
         try {
-          const migrated = await contract.methods[method](address).call();
+          const migrated = await contract.methods[method](address).call() as boolean;
           setHasMigrated(migrated);
         } catch (error) {
           console.error("Migration status check error:", error);
@@ -79,7 +74,7 @@ export default function SwapForm() {
       const checkAllowance = async () => {
         const contract = new web3.eth.Contract(ERC20_ABI, fromToken.address);
         try {
-          const allowance = await contract.methods.allowance(address, UTOPV3_ADDRESS).call();
+          const allowance = await contract.methods.allowance(address, UTOPV3_ADDRESS).call() as string;
           const weiAmount = fromAmount ? web3.utils.toWei(fromAmount, "ether") : "0";
           setIsApproved(BigInt(allowance) >= BigInt(weiAmount));
         } catch (error) {
@@ -149,11 +144,14 @@ export default function SwapForm() {
     const method = fromToken.name === "Utopos V1" ? "migrateFromV1" : "migrateFromV2";
 
     try {
+      console.log("Attempting migration:", { method, weiAmount, address });
       await writeContractAsync({
         address: UTOPV3_ADDRESS as `0x${string}`,
         abi: UTOPV3_ABI,
         functionName: method,
         args: [BigInt(weiAmount)],
+        gas: BigInt(200000), // Added gas limit
+        gasPrice: BigInt(web3.utils.toWei("50", "gwei")), // Added gas price
       });
       message.success(`Successfully migrated ${fromAmount} UTOP to V3!`);
       setIsApproved(false);
@@ -272,7 +270,7 @@ export default function SwapForm() {
         {/* Connect Wallet / Approve / Migrate Button */}
         {!isConnected ? (
           <div className="mt-4">
-            <appkit-button /> {/* Reown's Connect Wallet button */}
+            <appkit-button />
           </div>
         ) : hasMigrated ? (
           <Button
