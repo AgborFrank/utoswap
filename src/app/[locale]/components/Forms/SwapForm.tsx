@@ -122,7 +122,7 @@ export default function SwapForm() {
         address: fromToken.address as `0x${string}`,
         abi: ERC20_ABI,
         functionName: "approve",
-        args: [UTOPV3_ADDRESS, BigInt(weiAmount)],
+        args: [UTOPV3_ADDRESS, BigInt(weiAmount)], // Fixed: Convert string to bigint
       });
       setIsApproved(true);
       message.success("Approved! Now click Migrate");
@@ -150,8 +150,8 @@ export default function SwapForm() {
         abi: UTOPV3_ABI,
         functionName: method,
         args: [BigInt(weiAmount)],
-        gas: BigInt(200000), // Added gas limit
-        gasPrice: BigInt(web3.utils.toWei("50", "gwei")), // Added gas price
+        gas: BigInt(200000),
+        gasPrice: BigInt(web3.utils.toWei("50", "gwei")),
       });
       message.success(`Successfully migrated ${fromAmount} UTOP to V3!`);
       setIsApproved(false);
