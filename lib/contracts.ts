@@ -1,6 +1,7 @@
-export const UTOPV3_ADDRESS = "0x0946C90058cE01d734B9e770FFCfD0C029F83709";
 export const UTOPV1_ADDRESS = "0xA9F78BA8f650cd8cF6023bdbdA978eE77cF739De";
 export const UTOPV2_ADDRESS = "0x2E6819782bEdE1fBfaDa433906253A90CA06157a";
+export const UTOPV3_ADDRESS = "0x0946C90058cE01d734B9e770FFCfD0C029F83709";
+export const NEW_MIGRATION_ADDRESS = "0x306CB4DABB8009eEF2545732abC9555af606346E"; 
 
 export const ERC20_ABI = [
   {
@@ -35,7 +36,7 @@ export const ERC20_ABI = [
   },
 ] as const;
 
-export const UTOPV3_ABI = [
+export const NEW_MIGRATION_ABI = [
   {
     constant: false,
     inputs: [{ name: "amount", type: "uint256" }],
@@ -54,7 +55,7 @@ export const UTOPV3_ABI = [
   },
   {
     constant: true,
-    inputs: [{ name: "account", type: "address" }],
+    inputs: [{ name: "user", type: "address" }],
     name: "hasMigratedV1",
     outputs: [{ name: "", type: "bool" }],
     stateMutability: "view",
@@ -62,7 +63,7 @@ export const UTOPV3_ABI = [
   },
   {
     constant: true,
-    inputs: [{ name: "account", type: "address" }],
+    inputs: [{ name: "user", type: "address" }],
     name: "hasMigratedV2",
     outputs: [{ name: "", type: "bool" }],
     stateMutability: "view",

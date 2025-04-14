@@ -20,7 +20,7 @@ const metadata = {
   name: 'Utoswap',
   description: 'UTOSWAP',
   url: 'https://www.utoswap.com', // origin must match your domain & subdomain
-  icons: ["/assets/icons/icon-192x192.png"],
+  icons: ["/assets/img/icons/icon-192x192.png"],
 }
 
 
