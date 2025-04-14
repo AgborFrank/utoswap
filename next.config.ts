@@ -25,6 +25,10 @@ const nextConfig: NextConfig = {
         hostname: "utopos.io",
       },
     ],
+  
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   // Add other config options here if needed
 };

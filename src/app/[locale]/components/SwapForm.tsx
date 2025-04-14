@@ -5,22 +5,12 @@ import { Button, Input, Modal, Typography, message } from "antd";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import Image from "next/image";
 import Web3 from "web3";
-import {
-  UTOPV3_ADDRESS,
-  UTOPV1_ADDRESS,
-  UTOPV2_ADDRESS,
-  UTOPV3_ABI,
-  ERC20_ABI,
-} from "../../../../lib/contracts";
+import { UTOPV3_ADDRESS, UTOPV1_ADDRESS, UTOPV2_ADDRESS, NEW_MIGRATION_ADDRESS, NEW_MIGRATION_ABI, ERC20_ABI } from "../../../../lib/contracts";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import {
-  useChainId,
-  useSwitchChain,
-  useWriteContract,
-  useWalletClient,
-} from "wagmi";
+import { useChainId, useSwitchChain, useWriteContract, useWalletClient } from "wagmi";
 import { useAppKitAccount } from "@reown/appkit/react";
+import { WriteContractParameters } from "wagmi/actions";
 
 const { Title, Text } = Typography;
 
@@ -29,11 +19,7 @@ const tokenList = [
   { symbol: "UTOP", name: "Utopos V2", address: UTOPV2_ADDRESS },
 ];
 
-const UTOPV3_TOKEN = {
-  symbol: "UTOP",
-  name: "Utopos V3",
-  address: UTOPV3_ADDRESS,
-};
+const UTOPV3_TOKEN = { symbol: "UTOP", name: "Utopos V3", address: UTOPV3_ADDRESS };
 
 export default function SwapForm() {
   const t = useTranslations("common.home.swap");
@@ -65,9 +51,7 @@ export default function SwapForm() {
       const fetchBalance = async () => {
         const contract = new web3.eth.Contract(ERC20_ABI, fromToken.address);
         try {
-          const bal = (await contract.methods
-            .balanceOf(address)
-            .call()) as string;
+          const bal = await contract.methods.balanceOf(address).call() as string;
           setBalance(web3.utils.fromWei(bal, "ether"));
         } catch (error) {
           console.error("Balance fetch error:", error);
@@ -77,13 +61,10 @@ export default function SwapForm() {
       };
 
       const checkMigrationStatus = async () => {
-        const contract = new web3.eth.Contract(UTOPV3_ABI, UTOPV3_ADDRESS);
-        const method =
-          fromToken.name === "Utopos V1" ? "hasMigratedV1" : "hasMigratedV2";
+        const contract = new web3.eth.Contract(NEW_MIGRATION_ABI, NEW_MIGRATION_ADDRESS);
+        const method = fromToken.name === "Utopos V1" ? "hasMigratedV1" : "hasMigratedV2";
         try {
-          const migrated = (await contract.methods[method](
-            address
-          ).call()) as boolean;
+          const migrated = await contract.methods[method](address).call() as boolean;
           setHasMigrated(migrated);
         } catch (error) {
           console.error("Migration status check error:", error);
@@ -94,12 +75,8 @@ export default function SwapForm() {
       const checkAllowance = async () => {
         const contract = new web3.eth.Contract(ERC20_ABI, fromToken.address);
         try {
-          const allowance = (await contract.methods
-            .allowance(address, UTOPV3_ADDRESS)
-            .call()) as string;
-          const weiAmount = fromAmount
-            ? web3.utils.toWei(fromAmount, "ether")
-            : "0";
+          const allowance = await contract.methods.allowance(address, NEW_MIGRATION_ADDRESS).call() as string;
+          const weiAmount = fromAmount ? web3.utils.toWei(fromAmount, "ether") : "0";
           setIsApproved(BigInt(allowance) >= BigInt(weiAmount));
         } catch (error) {
           console.error("Allowance check error:", error);
@@ -114,17 +91,11 @@ export default function SwapForm() {
             await switchChain({ chainId: 137 });
           } catch (switchError) {
             console.error("Chain switch error:", switchError);
-            message.error(
-              "Failed to switch to Polygon Mainnet - please switch manually"
-            );
+            message.error("Failed to switch to Polygon Mainnet - please switch manually");
             return;
           }
         }
-        await Promise.all([
-          fetchBalance(),
-          checkMigrationStatus(),
-          checkAllowance(),
-        ]);
+        await Promise.all([fetchBalance(), checkMigrationStatus(), checkAllowance()]);
       };
 
       checkChainAndFetch();
@@ -140,37 +111,27 @@ export default function SwapForm() {
     const weiAmount = web3.utils.toWei(fromAmount, "ether");
 
     try {
-      const oldTokenContract = new web3.eth.Contract(
-        ERC20_ABI,
-        fromToken.address
-      );
-      const balance = (await oldTokenContract.methods
-        .balanceOf(address)
-        .call()) as string;
+      const oldTokenContract = new web3.eth.Contract(ERC20_ABI, fromToken.address);
+      const balance = await oldTokenContract.methods.balanceOf(address).call() as string;
       if (BigInt(balance) < BigInt(weiAmount)) {
         message.error("Insufficient balance");
         setLoading(false);
         return;
       }
 
-      await writeContractAsync({
+      const tx: WriteContractParameters = {
         address: fromToken.address as `0x${string}`,
         abi: ERC20_ABI,
         functionName: "approve",
-        args: [UTOPV3_ADDRESS, BigInt(weiAmount)], // Fixed: Convert string to bigint
-      });
+        args: [NEW_MIGRATION_ADDRESS, BigInt(weiAmount)],
+      };
+      await writeContractAsync(tx);
       setIsApproved(true);
       message.success("Approved! Now click Migrate");
     } catch (error) {
       console.error("Approval error:", error);
       const errorMsg = error instanceof Error ? error.message : String(error);
-      message.error(
-        `Approval failed: ${
-          errorMsg.includes("reverted")
-            ? "Transaction reverted - check allowance or balance"
-            : errorMsg
-        }`
-      );
+      message.error(`Approval failed: ${errorMsg.includes("reverted") ? "Transaction reverted - check allowance or balance" : errorMsg}`);
     }
     setLoading(false);
   };
@@ -182,32 +143,27 @@ export default function SwapForm() {
     }
     setLoading(true);
     const weiAmount = web3.utils.toWei(fromAmount, "ether");
-    const method =
-      fromToken.name === "Utopos V1" ? "migrateFromV1" : "migrateFromV2";
+    const method: "migrateFromV1" | "migrateFromV2" = fromToken.name === "Utopos V1" ? "migrateFromV1" : "migrateFromV2";
 
     try {
       console.log("Attempting migration:", { method, weiAmount, address });
-      await writeContractAsync({
-        address: UTOPV3_ADDRESS as `0x${string}`,
-        abi: UTOPV3_ABI,
+      const tx: WriteContractParameters = {
+        address: NEW_MIGRATION_ADDRESS as `0x${string}`,
+        abi: NEW_MIGRATION_ABI,
         functionName: method,
         args: [BigInt(weiAmount)],
-        gas: BigInt(200000),
-        gasPrice: BigInt(web3.utils.toWei("50", "gwei")),
-      });
+       // gasLimit: BigInt(300000),
+      };
+      console.log("Transaction config:", tx);
+      const txHash = await writeContractAsync(tx);
+      console.log("Transaction hash:", txHash);
       message.success(`Successfully migrated ${fromAmount} UTOP to V3!`);
       setIsApproved(false);
       setFromAmount("");
     } catch (error) {
       console.error("Migration error:", error);
       const errorMsg = error instanceof Error ? error.message : String(error);
-      message.error(
-        `Migration failed: ${
-          errorMsg.includes("reverted")
-            ? "Transaction reverted - ensure approved and not migrated"
-            : errorMsg
-        }`
-      );
+      message.error(`Migration failed: ${errorMsg.includes("reverted") ? "Transaction reverted - check balance, allowance, or migration status" : errorMsg}`);
     }
     setLoading(false);
   };

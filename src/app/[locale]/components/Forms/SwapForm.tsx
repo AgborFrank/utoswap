@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useChainId, useSwitchChain, useWriteContract, useWalletClient } from "wagmi";
 import { useAppKitAccount } from "@reown/appkit/react";
+import { WriteContractParameters } from "wagmi/actions";
 
 const { Title, Text } = Typography;
 
@@ -118,12 +119,13 @@ export default function SwapForm() {
         return;
       }
 
-      await writeContractAsync({
+      const tx: WriteContractParameters = {
         address: fromToken.address as `0x${string}`,
         abi: ERC20_ABI,
         functionName: "approve",
-        args: [NEW_MIGRATION_ADDRESS, BigInt(weiAmount)], // Approve new contract
-      });
+        args: [NEW_MIGRATION_ADDRESS, BigInt(weiAmount)],
+      };
+      await writeContractAsync(tx);
       setIsApproved(true);
       message.success("Approved! Now click Migrate");
     } catch (error) {
@@ -141,16 +143,16 @@ export default function SwapForm() {
     }
     setLoading(true);
     const weiAmount = web3.utils.toWei(fromAmount, "ether");
-    const method = fromToken.name === "Utopos V1" ? "migrateFromV1" : "migrateFromV2";
+    const method: "migrateFromV1" | "migrateFromV2" = fromToken.name === "Utopos V1" ? "migrateFromV1" : "migrateFromV2";
 
     try {
       console.log("Attempting migration:", { method, weiAmount, address });
-      const tx = {
-        address: NEW_MIGRATION_ADDRESS as `0x${string}`, // Use new contract
+      const tx: WriteContractParameters = {
+        address: NEW_MIGRATION_ADDRESS as `0x${string}`,
         abi: NEW_MIGRATION_ABI,
         functionName: method,
         args: [BigInt(weiAmount)],
-        gas: BigInt(300000),
+       // gasLimit: BigInt(300000),
       };
       console.log("Transaction config:", tx);
       const txHash = await writeContractAsync(tx);
