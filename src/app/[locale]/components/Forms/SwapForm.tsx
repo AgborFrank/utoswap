@@ -184,12 +184,12 @@ export default function SwapForm() {
   return (
     <>
       <div className="bg-wallet p-6 rounded-2xl w-full max-w-md shadow-md">
-        <Title level={4} className="text-center text-white mb-4">
+        <Title level={4} className="text-center text-text mb-4">
           Swap
         </Title>
 
         {/* From Input */}
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-500">
+        <div className="bg-background p-4 rounded-xl border border-gray-500">
           <div className="flex justify-between items-center">
             <Button
               onClick={openTokenModal}
@@ -243,7 +243,7 @@ export default function SwapForm() {
         </div>
 
         {/* To Input */}
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-500">
+        <div className="bg-background p-4 rounded-xl border border-gray-500">
           <div className="flex justify-between items-center">
             <Button
               shape="round"
@@ -269,7 +269,7 @@ export default function SwapForm() {
           </div>
         </div>
 
-        {/* Connect Wallet / Approve / Migrate Button */}
+     
         {!isConnected ? (
           <div className="mt-4">
             <appkit-button />
@@ -280,7 +280,7 @@ export default function SwapForm() {
             shape="round"
             size="large"
             block
-            className="mt-4 bg-gray-500 text-black font-bold text-lg py-3"
+            className="mt-4 bg-cta text-text font-bold text-lg py-3"
             disabled
           >
             {t("migrated")}
@@ -291,7 +291,7 @@ export default function SwapForm() {
             shape="round"
             size="large"
             block
-            className="mt-4 bg-blue-500 hover:bg-blue-600 text-black font-bold text-lg py-3"
+            className="mt-4 bg-cta hover:bg-blue-600 text-text font-bold text-lg py-3"
             onClick={handleApprove}
             loading={loading}
             disabled={!fromAmount || chainId !== 137}
@@ -304,7 +304,7 @@ export default function SwapForm() {
             shape="round"
             size="large"
             block
-            className="mt-4 bg-blue-500 hover:bg-blue-600 text-black font-bold text-lg py-3"
+            className="mt-4 bg-cta hover:bg-blue-600 text-text font-bold text-lg py-3"
             onClick={handleMigration}
             loading={loading}
             disabled={!fromAmount || chainId !== 137}

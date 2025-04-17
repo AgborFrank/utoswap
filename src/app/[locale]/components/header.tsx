@@ -141,6 +141,17 @@ export default function Header() {
           )}
          
         </div>
+        <div className="flex gap-6">
+        <Button
+                onPress={toggleTheme}
+                className="p-2 md:hidden bg-background text-text rounded-full hover:bg-cta/10 transition-colors w-fit flex justify-center"
+                aria-label="Toggle theme"
+              >
+                <Icon
+                  icon={theme === "light" ? "mdi:weather-sunny" : "mdi:weather-night"}
+                  className="text-xl"
+                />
+              </Button>
         <Button
           className="md:hidden p-2 text-text rounded-lg bg-cta/10 hover:opacity-80 focus:outline-none"
           onPress={toggleMenu}
@@ -149,10 +160,11 @@ export default function Header() {
           <Icon icon="duo-icons:menu" className="text-2xl" />
           Menu
         </Button>
+        </div>
       </div>
       {isMenuOpen && (
         <motion.div
-          className="md:hidden shadow-lg absolute top-full inset-x-0"
+          className="md:hidden shadow-lg bg-background absolute top-full inset-x-0"
           style={{ zIndex: 2000 }}
           variants={mobileMenuVariants}
           initial="hidden"
@@ -177,16 +189,7 @@ export default function Header() {
               </motion.div>
             ))}
             <div className="border-t border-gray-200 pt-4">
-              <Button
-                onPress={toggleTheme}
-                className="p-2 bg-background text-text rounded-full hover:bg-cta/10 transition-colors w-full flex justify-center"
-                aria-label="Toggle theme"
-              >
-                <Icon
-                  icon={theme === "light" ? "mdi:weather-sunny" : "mdi:weather-night"}
-                  className="text-xl"
-                />
-              </Button>
+              
               {isConnected ? (
                 <div className="flex flex-col gap-2">
                   <span className="text-text font-medium">
