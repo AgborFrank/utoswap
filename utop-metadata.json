@@ -1,0 +1,20 @@
+{
+    "name": "Utopos",
+    "symbol": "UTOP",
+    "description": "Utopos aims to build the world's first futuristic, eco-friendly blockchain city where everyone can explore the city and perform everyday activities in a virtual space (Metaverse). ",
+    "image": "https://utopos.io/static/media/logo.9fe42854c061ba8b5cc2.png", 
+    "attributes": [
+        {"trait_type": "Supply", "value": "100 Billion"}
+    ],
+    "properties": {
+        "files": [
+            {"uri": "https://utopos.io/static/media/logo.9fe42854c061ba8b5cc2.png", "type": "image/png"}
+        ],
+        "category": "image",
+        "creators": [
+           
+        ]
+    },
+ 
+    "external_url": "https://utopos.io/" 
+}
